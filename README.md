@@ -1,31 +1,54 @@
-# skeleton-generic #
+# Con-PCA Client
+### Angular frontend application
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-generic/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-generic/actions)
+### Requirements
+* For local setup, Get the right flavor of Docker for your OS...
+    - [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+    - [Docker for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+    - [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub project started.
-This skeleton project contains [licensing information](LICENSE), as
-well as [pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+    **Note:** The recommended requirement for deployment of this project is 4 GB RAM.
+    For Docker for Mac, this can be set by following these steps:
 
-In many cases you will instead want to use one of the more specific
-skeleton projects derived from this one.
+    Open Docker > Preferences > Advanced tab, then set memory to 4.0 GiB
 
-## Contributing ##
+## Additional Suggestions
 
-We welcome contributions!  Please see [here](CONTRIBUTING.md) for
-details.
+Here are some additional software to use along with develpment.
+These items are not required for development.
 
-## License ##
+- [VS Code](https://code.visualstudio.com/ "VS Code")
+- [MongoDB Compass](https://www.mongodb.com/products/compass "MongoDB Compass")
 
-This project is in the worldwide [public domain](LICENSE).
+## Local Install and Deployment:
 
-This project is in the public domain within the United States, and
-copyright and related rights in the work worldwide are waived through
-the [CC0 1.0 Universal public domain
-dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+Use `Makefile` located in the client directory to install and run all services.
 
-All contributions to this project will be released under the CC0
-dedication. By submitting a pull request, you are agreeing to comply
-with this waiver of copyright interest.
+### Setup and Build
+
+Create your .env files
+- `cp ./etc/env.dist .env`
+
+Build containers:
+- `make build`
+
+To run the containers, use:
+- `make up`
+
+Your output will look like:
+
+```shell
+-> % make up
+docker-compose up -d
+Creating domain-managment      ... done
+```
+
+Stop containers
+- `make stop`
+
+Remove containers
+- `make down`
+
+### To access the Angular app
+
+Angular app located at [localhost:4200](http://localhost:4200)
