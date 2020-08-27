@@ -5,11 +5,6 @@ import os
 # Third-Party Libraries
 from dotenv import load_dotenv
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
-
-# Disable insecure request warning
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -22,19 +17,19 @@ auth = {"api_key": API_KEY}
 
 def get_domain_list():
     """Returns a list of available domains from Route53."""
-    resp = requests.get(f"{URL}/api/domains/", headers=auth, verify=False)
+    resp = requests.get(f"{URL}/api/domains/", headers=auth)
     return resp.json()
 
 
 def get_website_content_list():
     """Returns a list of available website content from S3."""
-    resp = requests.get(f"{URL}/api/websites/", headers=auth, verify=False)
+    resp = requests.get(f"{URL}/api/websites/", headers=auth)
     return resp.json()
 
 
 def get_application_list():
     """Returns a list of applications."""
-    resp = requests.get(f"{URL}/api/applications/", headers=auth, verify=False)
+    resp = requests.get(f"{URL}/api/applications/", headers=auth)
     return resp.json()
 
 
@@ -52,9 +47,7 @@ def launch_live_website(application_id, domain_id, website_id):
         "domain_id": domain_id,
         "website_id": website_id,
     }
-    resp = requests.post(
-        f"{URL}/api/live-sites/", headers=auth, json=post_data, verify=False
-    )
+    resp = requests.post(f"{URL}/api/live-sites/", headers=auth, json=post_data)
 
     return resp.json()
 
