@@ -1,5 +1,11 @@
+# Python
 .mypy_cache
 .python-version
 __pycache__
 /Lib
 /Scripts
+.venv/
+.env
+
+# VS Code
+.vscode

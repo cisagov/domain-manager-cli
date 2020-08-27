@@ -1,23 +1,19 @@
-# skeleton-generic #
+# Domain Manager Script
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-generic/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-generic/actions)
+Domain Categorization and Management Scripts
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub project started.
-This skeleton project contains [licensing information](LICENSE), as
-well as [pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+## Run scripts
 
-In many cases you will instead want to use one of the more specific
-skeleton projects derived from this one.
+1. Copy your env vars:
 
-## Contributing ##
+   - `cp etc/env.dist src/scripts/.env`
+
+## Contributing
 
 We welcome contributions!  Please see [here](CONTRIBUTING.md) for
 details.
 
-## License ##
+## License
 
 This project is in the worldwide [public domain](LICENSE).
 
