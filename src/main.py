@@ -1,6 +1,7 @@
 """Domain Manager main script."""
 # Third-Party Libraries
 from colorama import Fore
+from scripts.run import run
 
 
 def main():
@@ -18,6 +19,7 @@ def main():
     """
 
     print(Fore.CYAN + header)
+    run()
 
 
 if __name__ == "__main__":
