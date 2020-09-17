@@ -4,6 +4,12 @@ import sys
 
 # Third-Party Libraries
 from colorama import Fore
+from scripts.get_data import (
+    get_application_list,
+    get_domain_list,
+    get_live_site_list,
+    get_website_content_list,
+)
 from utils.switch import Switch
 
 
@@ -14,6 +20,10 @@ def run():
         action = input(Fore.WHITE + "What action would you like to take? ")
 
         with Switch(action) as s:
+            s.case("d", get_domain_list)
+            s.case("w", get_website_content_list)
+            s.case("a", get_application_list)
+            s.case("s", get_live_site_list)
             s.case(["x", "bye", "exit", "exit()"], exit_app)
             s.default(unknown_command)
 
@@ -25,6 +35,8 @@ def show_commands():
         + """
 View available [D]omains
 View available S3 [W]ebsites
+View available [A]pplications
+View [S]ites that are currently live
 e[X]it
 
     """
