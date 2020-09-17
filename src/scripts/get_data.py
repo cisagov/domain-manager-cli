@@ -47,12 +47,14 @@ if __name__ == "__main__":
     """
     )
     domain_list = [domain.get("Name") for domain in get_domain_list()]
+    print(domain_list)
     print(
         """
     **** Website Content ****
     """
     )
     content_list = [content.get("name") for content in get_website_content_list()]
+    print(content_list)
     print(
         """
     **** Applications ****
@@ -61,9 +63,11 @@ if __name__ == "__main__":
     application_list = [
         application.get("name") for application in get_application_list()
     ]
+    print(application_list)
     print(
         """
     **** Live Sites ****
     """
     )
     live_site_list = [site.get("name") for site in get_live_site_list()]
+    print(live_site_list)
