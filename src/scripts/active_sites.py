@@ -5,7 +5,7 @@ import os
 # Third-Party Libraries
 from dotenv import load_dotenv
 import requests
-from utils.message_handling import success_msg
+from utils.message_handling import error_msg, success_msg
 
 # Load environment variables from .env file
 load_dotenv()
@@ -86,7 +86,13 @@ def launch_live_site():
 
     resp = requests.post(f"{URL}/api/live-sites/", headers=auth, json=post_data)
 
-    success_msg(resp.json())
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+
+    success_msg(resp.json()["message"])
     return resp.json()
 
 

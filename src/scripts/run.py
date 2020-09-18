@@ -5,6 +5,7 @@ import sys
 # Third-Party Libraries
 from colorama import Fore
 from scripts.active_sites import delete_live_site, launch_live_site
+from scripts.categorize_site import categorize_live_site
 from scripts.get_data import (
     get_application_list,
     get_domain_list,
@@ -27,7 +28,7 @@ def run():
             s.case("a", get_application_list)
             s.case("s", get_live_site_list)
             s.case("l", launch_live_site)
-            s.case("c", print("site categorized"))
+            s.case("c", categorize_live_site)
             s.case("e", delete_live_site)
             s.case(["x", "bye", "exit", "exit()"], exit_app)
             s.default(unknown_command)
