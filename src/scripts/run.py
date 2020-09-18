@@ -27,6 +27,7 @@ def run():
             s.case("a", get_application_list)
             s.case("s", get_live_site_list)
             s.case("l", launch_live_site)
+            s.case("c", print("site categorized"))
             s.case("e", delete_live_site)
             s.case(["x", "bye", "exit", "exit()"], exit_app)
             s.default(unknown_command)
