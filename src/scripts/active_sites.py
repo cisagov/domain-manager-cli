@@ -1,19 +1,8 @@
 """A sample python script."""
-# Standard Python Libraries
-import os
-
 # Third-Party Libraries
-from dotenv import load_dotenv
 import requests
 from utils.message_handling import error_msg, success_msg
-
-# Load environment variables from .env file
-load_dotenv()
-URL = os.environ.get("API_URL")
-API_KEY = os.environ.get("API_KEY")
-
-# Pass in api key for authorized access
-auth = {"api_key": API_KEY}
+from utils.settings import URL, auth
 
 
 def get_domains():
