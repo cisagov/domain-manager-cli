@@ -55,5 +55,5 @@ e[X]it
 def exit_app():
     """Exit application."""
     print()
-    print(Fore.RED + "Bye")
+    print(Fore.GREEN + "Bye")
     return sys.exit()
