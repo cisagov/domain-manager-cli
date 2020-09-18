@@ -34,6 +34,12 @@ def get_applications():
     return resp.json()
 
 
+def get_live_sites():
+    """Returns a list of active websites."""
+    resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
+    return resp.json()
+
+
 def launch_live_site():
     """
     Launch a live website.
@@ -84,13 +90,21 @@ def launch_live_site():
     return resp.json()
 
 
-def delete_live_site(live_site_id):
+def delete_live_site():
     """
     Deactivate an active site.
 
     Unhook domain name by removing DNS records.
     Delete the live S3 bucket if applicable.
     """
-    resp = requests.delete(f"{URL}/api/live-site/{live_site_id}/", headers=auth)
+    # Define the desired site name from list
+    site_name = input("Please enter site name: ")
 
+    # Access live site data by uuid
+    live_site_id = "".join(
+        site.get("_id") for site in get_live_sites() if site_name == site.get("name")
+    )
+
+    resp = requests.delete(f"{URL}/api/live-site/{live_site_id}/", headers=auth)
+    success_msg(resp.json()["message"])
     return resp.json()
