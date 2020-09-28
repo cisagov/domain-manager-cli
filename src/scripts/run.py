@@ -43,6 +43,7 @@ View available [D]omains
 View available S3 [W]ebsites
 View available [A]pplications
 View [S]ites that are currently live
+C[H]eck a domain's categories
 [L]aunch a new site
 [C]ategorize an existing site
 Delete an [E]xisting site
