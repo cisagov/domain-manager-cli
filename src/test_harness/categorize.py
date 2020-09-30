@@ -29,7 +29,7 @@ def categorization_manager(domain_url):
             driver.quit()
         except Exception as err:
             driver.quit()
-            return {"error": str(err)}
+            print(str(err))
 
     # Quit WebDriver
     driver.quit()
