@@ -24,7 +24,7 @@ def categorization_manager(domain_url):
             driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
             exec(
                 open(f"../proxies/{proxy}").read(),
-                {"driver": driver, "domain": domain_url},
+                {"driver": driver, "domain": domain_url, "api_key": api_key},
             )
             driver.quit()
         except Exception as err:

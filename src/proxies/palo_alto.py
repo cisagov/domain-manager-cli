@@ -17,7 +17,6 @@ def get_and_solve(url):
     sitekey = recaptcha_element.get_attribute("data-sitekey")
     print(sitekey)
 
-    api_key = os.getenv("APIKEY_2CAPTCHA")
     solver = TwoCaptcha(api_key)
     try:
         result = solver.recaptcha(sitekey=sitekey, url=url)
