@@ -1,4 +1,4 @@
-2captcha-python=2.24.0
+2captcha-python==1.0.3
 appdirs==1.4.4
 appnope==0.1.0
 attrs==20.1.0
