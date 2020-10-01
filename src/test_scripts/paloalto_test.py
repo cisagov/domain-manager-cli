@@ -36,7 +36,7 @@ class TestAddurl:
         self.driver.switch_to.default_content()
         self.driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
         self.driver.find_element(By.ID, "myLink").click()
-        time.sleep(3)
+        time.sleep(4)
         self.driver.find_element(By.CSS_SELECTOR, ".fa-plus-square").click()
         time.sleep(1)
         self.driver.find_element(By.ID, "searchInput").click()
@@ -63,7 +63,7 @@ class TestAddurl:
         sitekey = recaptcha_element.get_attribute("data-sitekey")
         print(sitekey)
 
-        api_key = os.getenv("APIKEY_2CAPTCHA")
+        api_key = os.getenv("TWO_CAPTCHA")
         solver = TwoCaptcha(api_key)
         try:
             result = solver.recaptcha(sitekey=sitekey, url=url)
