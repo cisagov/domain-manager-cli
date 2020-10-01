@@ -20,7 +20,7 @@ from twocaptcha import TwoCaptcha
 
 class TestAddurl:
     def setup_method(self):
-        self.driver = webdriver.Chrome(executable_path="./drivers/chromedriver.exe")
+        self.driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
         self.vars = {}
 
     def teardown_method(self):
@@ -40,7 +40,9 @@ class TestAddurl:
         self.driver.find_element(By.CSS_SELECTOR, ".fa-plus-square").click()
         time.sleep(1)
         self.driver.find_element(By.ID, "searchInput").click()
-        self.driver.find_element(By.ID, "searchInput").send_keys("heal")
+        self.driver.find_element(By.ID, "searchInput").send_keys(
+            "Computer and Internet Info"
+        )
         self.driver.find_element(
             By.CSS_SELECTOR, ".cate-list-group-item:nth-child(23) > p"
         ).click()
