@@ -35,4 +35,6 @@ def categorization_manager(domain_url):
     driver.quit()
 
 
-categorization_manager("example.com")
+domain_name = input("Enter a domain name: ")
+category_name = input("Enter a category: ")
+categorization_manager(domain_name)
