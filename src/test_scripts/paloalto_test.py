@@ -47,10 +47,10 @@ class TestAddurl:
         self.driver.find_element(By.ID, "id_comment").click()
         self.driver.find_element(By.ID, "id_comment").send_keys("Test Comment")
         self.driver.find_element(By.ID, "id_your_email").send_keys(
-            "barry.k.hansen@gmail.com"
+            "idahotester33@gmail.com"
         )
         self.driver.find_element(By.ID, "id_confirm_email").send_keys(
-            "barry.k.hansen@gmail.com"
+            "idahotester33@gmail.com"
         )
         self.getAndSolve("https://urlfiltering.paloaltonetworks.com/")
         self.driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
