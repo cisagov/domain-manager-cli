@@ -4,6 +4,7 @@
 # flake8: noqa
 # Standard Python Libraries
 import os
+import time
 
 # Third-Party Libraries
 from dotenv import load_dotenv
@@ -26,6 +27,7 @@ def categorization_manager(domain_url):
                 open(f"../proxies/{proxy}").read(),
                 {"driver": driver, "domain": domain_url, "api_key": api_key},
             )
+            time.sleep(3)
             driver.quit()
         except Exception as err:
             driver.quit()
