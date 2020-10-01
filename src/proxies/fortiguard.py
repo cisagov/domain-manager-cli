@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
 
+print("Running Fortiguard proxy")
 driver.get("https://www.fortiguard.com/faq/wfratingsubmit")
 driver.set_window_size(1680, 979)
 driver.find_element(By.ID, "__agreementButton").click()

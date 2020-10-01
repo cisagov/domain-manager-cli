@@ -32,6 +32,7 @@ def get_and_solve(url):
         time.sleep(3)
 
 
+print("Running Palo Alto proxy")
 driver.get("https://urlfiltering.paloaltonetworks.com/")
 driver.set_window_size(1518, 804)
 driver.find_element(By.ID, "id_url").click()

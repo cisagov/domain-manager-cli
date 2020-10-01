@@ -40,6 +40,7 @@ def get_and_solve(url):
         time.sleep(3)
 
 
+print("Running Trend Micro proxy")
 driver.get("https://global.sitesafety.trendmicro.com/")
 driver.set_window_size(2576, 1416)
 driver.find_element(By.ID, "urlname").click()

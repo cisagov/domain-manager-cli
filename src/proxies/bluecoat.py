@@ -1,8 +1,12 @@
 # mypy: ignore-errors
 # flake8: noqa
+# Standard Python Libraries
+import time
+
 # Third-Party Libraries
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 
 def check_submitted():
@@ -12,6 +16,7 @@ def check_submitted():
     return
 
 
+print("Running Bluecoat proxy")
 driver.get("https://sitereview.bluecoat.com/")
 driver.set_window_size(1765, 1040)
 driver.find_element(By.ID, "txtUrl").click()
