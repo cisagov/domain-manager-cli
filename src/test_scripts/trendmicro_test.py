@@ -21,7 +21,7 @@ from twocaptcha import TwoCaptcha
 
 class TestTrendmicro:
     def setup_method(self):
-        self.driver = webdriver.Chrome(executable_path="./drivers/chromedriver.exe")
+        self.driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
         self.vars = {}
 
     def teardown_method(self):
@@ -40,24 +40,30 @@ class TestTrendmicro:
         self.driver.find_element(
             By.CSS_SELECTOR, ".modal_content_2:nth-child(2) a"
         ).click()
+        time.sleep(1)
         self.driver.find_element(By.CSS_SELECTOR, ".lightbg:nth-child(4) input").click()
         self.driver.find_element(
             By.CSS_SELECTOR, ".suggestoption > .radioinput"
         ).click()
         self.driver.find_element(By.ID, "radio5").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".General .normal").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".Business .normal").click()
+        category_dropdown = self.driver.find_element_by_xpath(
+            "//*[contains(text(),'General')]"
+        )
         time.sleep(1)
-        self.driver.find_element(
-            By.CSS_SELECTOR, "#Business .child_row_01:nth-child(3) .radio_c1"
-        ).click()
+        category_dropdown.click()
+        category_button = category_dropdown.find_element_by_xpath(
+            "//input[@value='Health']"
+        )
+        time.sleep(1)
+        category_button.click()
+        time.sleep(1)
         self.driver.find_element(By.ID, "owner").click()
         self.driver.find_element(By.ID, "comments").click()
         self.driver.find_element(By.ID, "comments").send_keys(
             "Changing Website for customer"
         )
         self.driver.find_element(By.ID, "textfieldemail").send_keys(
-            "barry.k.hansen@gmail.com"
+            "idahotester33@gmail.com"
         )
         self.getAndSolve("https://global.sitesafety.trendmicro.com/")
         self.driver.find_element(By.NAME, "send").click()

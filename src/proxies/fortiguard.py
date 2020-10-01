@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
 
+print("Running Fortiguard proxy")
 driver.get("https://www.fortiguard.com/faq/wfratingsubmit")
 driver.set_window_size(1680, 979)
 driver.find_element(By.ID, "__agreementButton").click()
@@ -31,9 +32,9 @@ dropdown.find_element(By.XPATH, "//option[. = 'Health and Wellness']").click()
 driver.find_element(By.CSS_SELECTOR, ".page-section > .row:nth-child(2)").click()
 wait.until(EC.presence_of_element_located((By.ID, "web_filter_rating_info_form_name")))
 driver.find_element(By.ID, "web_filter_rating_info_form_name").click()
-driver.find_element(By.ID, "web_filter_rating_info_form_name").send_keys("Barry Hansen")
+driver.find_element(By.ID, "web_filter_rating_info_form_name").send_keys("Idaho Tester")
 driver.find_element(By.ID, "web_filter_rating_info_form_email").send_keys(
-    "barry.k.hansen@gmail.com"
+    "idahotester33@gmail.com"
 )
 driver.find_element(By.ID, "web_filter_rating_info_form_companyname").send_keys("INL")
 recaptcha_element = driver.find_element(By.CLASS_NAME, "g-recaptcha")

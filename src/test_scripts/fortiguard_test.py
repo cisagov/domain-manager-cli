@@ -41,7 +41,7 @@ class TestFortiguard:
         self.driver.find_element(By.ID, "web_filter_rating_info_form_url").click()
         self.driver.find_element(By.ID, "web_filter_rating_info_form_url").click()
         self.driver.find_element(By.ID, "web_filter_rating_info_form_url").send_keys(
-            "https://www.northwestaustindentists.com/"
+            "https://example.com"
         )
         wait = WebDriverWait(self.driver, 10)
         wait.until(
@@ -64,10 +64,10 @@ class TestFortiguard:
         )
         self.driver.find_element(By.ID, "web_filter_rating_info_form_name").click()
         self.driver.find_element(By.ID, "web_filter_rating_info_form_name").send_keys(
-            "Barry Hansen"
+            "Idaho Tester"
         )
         self.driver.find_element(By.ID, "web_filter_rating_info_form_email").send_keys(
-            "barry.k.hansen@gmail.com"
+            "idahotester33@gmail.com"
         )
         self.driver.find_element(
             By.ID, "web_filter_rating_info_form_companyname"
