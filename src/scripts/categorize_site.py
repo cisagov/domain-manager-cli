@@ -42,7 +42,9 @@ def categorize_live_site():
         if site_name == site.get("domain").get("Name")
     )
 
-    resp = requests.get(f"{URL}/api/categorize/{live_site_id}/", headers=auth)
+    resp = requests.get(
+        f"{URL}/api/categorize/{live_site_id}/?category={category_name}", headers=auth
+    )
 
     try:
         resp.raise_for_status()
