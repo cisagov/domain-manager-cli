@@ -7,6 +7,7 @@ import sys
 import time
 
 # Third-Party Libraries
+from dotenv import load_dotenv
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -16,6 +17,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
+
+load_dotenv()
 
 
 class TestAddurl:
@@ -30,7 +33,7 @@ class TestAddurl:
         self.driver.get("https://urlfiltering.paloaltonetworks.com/")
         self.driver.set_window_size(1518, 804)
         self.driver.find_element(By.ID, "id_url").click()
-        self.driver.find_element(By.ID, "id_url").send_keys("testingaccount.xyz")
+        self.driver.find_element(By.ID, "id_url").send_keys("thisisreal.xyz")
         self.getAndSolve("https://urlfiltering.paloaltonetworks.com/")
 
         self.driver.switch_to.default_content()
@@ -40,9 +43,8 @@ class TestAddurl:
         self.driver.find_element(By.CSS_SELECTOR, ".fa-plus-square").click()
         time.sleep(1)
         self.driver.find_element(By.ID, "searchInput").click()
-        self.driver.find_element(By.ID, "searchInput").send_keys(
-            "Computer and Internet Info"
-        )
+        self.driver.find_element(By.ID, "searchInput").send_keys("Health and Medicine")
+        time.sleep(1)
         self.driver.find_element(
             By.CSS_SELECTOR, ".cate-list-group-item:nth-child(23) > p"
         ).click()
