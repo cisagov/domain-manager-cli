@@ -39,7 +39,6 @@ driver.find_element(By.ID, "web_filter_rating_info_form_email").send_keys(
 driver.find_element(By.ID, "web_filter_rating_info_form_companyname").send_keys("INL")
 recaptcha_element = driver.find_element(By.CLASS_NAME, "g-recaptcha")
 sitekey = recaptcha_element.get_attribute("data-sitekey")
-print(sitekey)
 
 solver = TwoCaptcha(api_key)
 try:
