@@ -35,6 +35,7 @@ def categorization_manager(domain_url):
 
     # Quit WebDriver
     driver.quit()
+    print(f"{domain_url} has been categorized")
 
 
 domain_name = input("Enter a domain name: ")
