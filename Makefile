@@ -17,3 +17,7 @@ venv:
 # target: init = load initial data to database
 run:
 	python src/main.py
+
+lint:
+	pre-commit autoupdate
+	pre-commit run --all-files
