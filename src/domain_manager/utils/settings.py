@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv(dotenv_path="../../.env")
+load_dotenv()
 URL = os.environ.get("API_URL")
 API_KEY = os.environ.get("API_KEY")
 
