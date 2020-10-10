@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from selenium import webdriver
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(dotenv_path="../../.env")
 api_key = os.getenv("TWO_CAPTCHA")
 
 

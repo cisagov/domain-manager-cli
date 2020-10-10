@@ -18,7 +18,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
 
-load_dotenv()
+load_dotenv(dotenv_path="../../.env")
 
 
 class TestAddurl:
