@@ -19,12 +19,12 @@ def categorization_manager(domain_url):
     """Categorize site with all proxies in proxies folder."""
 
     # Submit domain to proxy
-    proxies = os.listdir("../proxies")
+    proxies = os.listdir("proxies")
     for proxy in proxies:
         try:
             driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
             exec(
-                open(f"../proxies/{proxy}").read(),
+                open(f"./proxies/{proxy}").read(),
                 {"driver": driver, "domain": domain_url, "api_key": api_key},
             )
             time.sleep(3)
