@@ -6,6 +6,20 @@ import time
 # Third-Party Libraries
 import boto3
 
+route53 = boto3.client("route53")
+
+
+def list_hosted_zones(names_only=False):
+    """
+    List hosted zones.
+
+    Set names_only to true if only hosted zone names are needed.
+    """
+    if not names_only:
+        return route53.list_hosted_zones()["HostedZones"]
+
+    return [hosted_zone.get("Name") for hosted_zone in list_hosted_zones()]
+
 
 def generate_hosted_zone(domain_name):
     """
@@ -13,17 +27,11 @@ def generate_hosted_zone(domain_name):
 
     Return a list of nameservers for the user specified domain
     """
-    route53 = boto3.client("route53")
-
-    hosted_zone_list = route53.list_hosted_zones()["HostedZones"]
-
-    hosted_zone_names = [hosted_zone.get("Name") for hosted_zone in hosted_zone_list]
-
-    if f"{domain_name}." in hosted_zone_names:
+    if f"{domain_name}." in list_hosted_zones(names_only=True):
         hosted_zone_id = "".join(
             hosted_zone.get("Id")
-            for hosted_zone in hosted_zone_list
-            if hosted_zone.get("Name") == "signalsquared.com."
+            for hosted_zone in list_hosted_zones()
+            if hosted_zone.get("Name") == f"{domain_name}."
         )
         hosted_zone = route53.get_hosted_zone(Id=hosted_zone_id)
         return "\n".join(
@@ -44,6 +52,18 @@ def generate_hosted_zone(domain_name):
     )
 
 
+def delete_hosted_zone(domain_name):
+    """Delete a hosted zone from Route53."""
+    if f"{domain_name}." in list_hosted_zones(names_only=True):
+        hosted_zone_id = "".join(
+            hosted_zone.get("Id")
+            for hosted_zone in list_hosted_zones()
+            if hosted_zone.get("Name") == f"{domain_name}."
+        )
+        route53.delete_hosted_zone(Id=hosted_zone_id)
+        return f"{domain_name} hosted zone has been deleted."
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -52,5 +72,16 @@ if __name__ == "__main__":
         help="enter a qualified domain such as www.example.com to create a hosted zone",
         type=str,
     )
+    parser.add_argument(
+        "-rm",
+        "--remove",
+        action="store_true",
+        help="enter a qualified domain such as www.example.com to create a hosted zone",
+    )
     args = parser.parse_args()
-    print(generate_hosted_zone(args.domain))
+
+    if args.remove:
+        run = delete_hosted_zone(args.domain)
+    else:
+        run = generate_hosted_zone(args.domain)
+    print(run)
