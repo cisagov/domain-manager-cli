@@ -16,7 +16,7 @@ venv:
 
 # target: init = load initial data to database
 run:
-	python src/main.py
+	python src/domain_manager/main.py
 
 lint:
 	pre-commit autoupdate

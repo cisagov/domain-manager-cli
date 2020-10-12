@@ -18,7 +18,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
 
-load_dotenv()
+load_dotenv(dotenv_path="../../.env")
 
 
 class TestAddurl:
@@ -63,7 +63,6 @@ class TestAddurl:
 
         recaptcha_element = self.driver.find_element(By.CLASS_NAME, "g-recaptcha")
         sitekey = recaptcha_element.get_attribute("data-sitekey")
-        print(sitekey)
 
         api_key = os.getenv("TWO_CAPTCHA")
         solver = TwoCaptcha(api_key)

@@ -11,21 +11,26 @@ from dotenv import load_dotenv
 from selenium import webdriver
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(dotenv_path="../../.env")
 api_key = os.getenv("TWO_CAPTCHA")
 
 
-def categorization_manager(domain_url):
+def categorization_manager(domain_url, category_name):
     """Categorize site with all proxies in proxies folder."""
 
     # Submit domain to proxy
-    proxies = os.listdir("../proxies")
+    proxies = os.listdir("proxies")
     for proxy in proxies:
         try:
             driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
             exec(
-                open(f"../proxies/{proxy}").read(),
-                {"driver": driver, "domain": domain_url, "api_key": api_key},
+                open(f"./proxies/{proxy}").read(),
+                {
+                    "driver": driver,
+                    "domain": domain_url,
+                    "api_key": api_key,
+                    "category": category_name,
+                },
             )
             time.sleep(3)
             driver.quit()
@@ -40,4 +45,4 @@ def categorization_manager(domain_url):
 
 domain_name = input("Enter a domain name: ")
 category_name = input("Enter a category: ")
-categorization_manager(domain_name)
+categorization_manager(domain_name, category_name)

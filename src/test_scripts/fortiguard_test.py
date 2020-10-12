@@ -9,6 +9,8 @@ import time
 
 # Third-Party Libraries
 from dotenv import load_dotenv
+
+# Load environment variables from .env file
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -20,8 +22,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from twocaptcha import TwoCaptcha
 
-# Load environment variables from .env file
-load_dotenv()
+load_dotenv(dotenv_path="../../.env")
 api_key = os.getenv("TWO_CAPTCHA")
 
 
