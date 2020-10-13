@@ -9,6 +9,7 @@ from utils.settings import URL, auth
 def check_categories():
     """Check a domain's categories on multiple proxies."""
     domain = input("Please enter a domain name: ")
+    print("Checking categories...")
     resp = requests.get(f"{URL}/api/check/?domain={domain}", headers=auth)
     try:
         resp.raise_for_status()
