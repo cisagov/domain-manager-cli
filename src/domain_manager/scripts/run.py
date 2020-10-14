@@ -7,6 +7,7 @@ from colorama import Fore
 from scripts.active_sites import delete_live_site, launch_live_site
 from scripts.categorize_site import categorize_live_site
 from scripts.check_categories import check_categories
+from scripts.dns_record_handler import generate_hosted_zones
 from scripts.get_data import (
     get_application_list,
     get_domain_list,
@@ -29,6 +30,7 @@ def run():
             s.case("a", get_application_list)
             s.case("s", get_live_site_list)
             s.case("l", launch_live_site)
+            s.case("r", generate_hosted_zones)
             s.case("c", categorize_live_site)
             s.case("e", delete_live_site)
             s.case("h", check_categories)
@@ -46,6 +48,7 @@ View available S3 [W]ebsites
 View available [A]pplications
 View [S]ites that are currently live
 C[H]eck a domain's categorization status
+Create DNS [R]ecord handlers
 [L]aunch a new site
 [C]ategorize an existing site
 Delete an [E]xisting site
