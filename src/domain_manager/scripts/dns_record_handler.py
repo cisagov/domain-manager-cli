@@ -7,9 +7,12 @@ from utils.settings import URL, auth
 
 def generate_hosted_zones():
     """Generate Route53 Hosted Zones for specified domains."""
-    post_data = {
-        "domains": ["signalsquared.com", "signalcubed.com", "signalpowerthree.com"]
-    }
+    text_file_name = input("Please your txt file name: ")
+
+    post_data = {}
+    with open(f"text_files/{text_file_name}.txt", "r") as reader:
+        post_data["domains"] = [line.replace("\n", "") for line in reader]
+
     resp = requests.post(f"{URL}/api/generate-dns/", headers=auth, json=post_data)
     try:
         resp.raise_for_status()
@@ -17,7 +20,14 @@ def generate_hosted_zones():
         error_msg(str(e))
         return
 
-    success_msg(
-        "DNS handlers have been created for \n" + "\n".join(i for i in resp.json())
+    resp_txt = "\n\n".join(
+        key + "\n\n" + "\n".join(value) for key, value in resp.json().items()
     )
+    with open("output.txt", "w") as output:
+        output.write(resp_txt)
+
+    success_msg(
+        "DNS handlers have been created for: \n" + "\n".join(i for i in resp.json())
+    )
+    success_msg("\nPlease check output.txt to retrieve your nameservers")
     return resp.json()
