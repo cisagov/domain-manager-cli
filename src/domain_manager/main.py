@@ -1,11 +1,34 @@
 """Domain Manager main script."""
 # Third-Party Libraries
+import click
 from colorama import Fore
-from scripts.run import run
 
 
+@click.group()
 def main():
-    """Main function."""
+    """Entrypoint group."""
+    pass
+
+
+@main.group()
+def get_data():
+    """Return domain manager data."""
+    pass
+
+
+@get_data.command("domains")
+def get_domains():
+    """Get a list of domains."""
+    pass
+
+
+@get_data.command("content")
+def get_content():
+    """Get a list of content."""
+    click.echo("get_content")
+
+
+if __name__ == "__main__":
     header = """\
      _____                        _         __  __                                   
     |  __ \                      (_)       |  \/  |                                  
@@ -18,9 +41,5 @@ def main():
                     Launch websites and categorize your Domains!
     """
 
-    print(Fore.CYAN + header)
-    run()
-
-
-if __name__ == "__main__":
+    click.echo(Fore.CYAN + header)
     main()
