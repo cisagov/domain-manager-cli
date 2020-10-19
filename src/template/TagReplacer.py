@@ -32,4 +32,4 @@ def update_file(template, tags):
         t.write(html)
     t.close()
 
-replace_tags("./src/template/templates/Dentist_Template","./src/template/templates/Dentist_Template/profile.json")
+replace_tags("./src/template/templates/Family_Lawyer_Template","./src/template/templates/Family_Lawyer_Template/profile.json")
