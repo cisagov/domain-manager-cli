@@ -2,30 +2,13 @@
 # Third-Party Libraries
 import click
 from colorama import Fore
+from scripts.get_data import get_data
 
 
 @click.group()
-def main():
-    """Entrypoint group."""
+def cli():
+    """Domain manager command line application."""
     pass
-
-
-@main.group()
-def get_data():
-    """Return domain manager data."""
-    pass
-
-
-@get_data.command("domains")
-def get_domains():
-    """Get a list of domains."""
-    pass
-
-
-@get_data.command("content")
-def get_content():
-    """Get a list of content."""
-    click.echo("get_content")
 
 
 if __name__ == "__main__":
@@ -42,4 +25,5 @@ if __name__ == "__main__":
     """
 
     click.echo(Fore.CYAN + header)
-    main()
+    cli()
+    cli.add_command(get_data)

@@ -1,11 +1,19 @@
 """A sample python script."""
 # Third-Party Libraries
+import click
 from colorama import Fore
 import requests
 from utils.settings import URL, auth
 
 
-def get_domain_list():
+@click.group()
+def get_data():
+    """Get data group."""
+    pass
+
+
+@get_data.command("domains")
+def get_domains():
     """Returns a list of available domains from Route53."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") + "." for site in resp.json()]
@@ -27,7 +35,7 @@ def get_domain_list():
     return resp.json()
 
 
-def get_website_content_list():
+def get_website_content():
     """Returns a list of available website content from S3."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_site_contents = [site.get("website").get("name") for site in resp.json()]
@@ -49,7 +57,7 @@ def get_website_content_list():
     return resp.json()
 
 
-def get_application_list():
+def get_applications():
     """Returns a list of applications."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_site_applications = [
@@ -72,7 +80,7 @@ def get_application_list():
     return resp.json()
 
 
-def get_live_site_list():
+def get_live_sites():
     """Returns a list of active websites."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") for site in resp.json()]
