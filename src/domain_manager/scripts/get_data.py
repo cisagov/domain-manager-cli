@@ -8,7 +8,7 @@ from utils.settings import URL, auth
 
 @click.group()
 def get_data():
-    """Get data group."""
+    """Get available data."""
     pass
 
 
@@ -24,17 +24,11 @@ def get_domains():
         for domain in resp.json()
         if not domain.get("Name") in live_sites
     ]
-
-    print(
-        Fore.GREEN
-        + """
-**** Domains ****
-    """
-    )
     print(Fore.GREEN + "\n".join(domains))
     return resp.json()
 
 
+@get_data.command("content")
 def get_website_content():
     """Returns a list of available website content from S3."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
@@ -46,17 +40,11 @@ def get_website_content():
         for content in resp.json()
         if not content.get("name") in live_site_contents
     ]
-
-    print(
-        Fore.GREEN
-        + """
-**** Website Content ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(content))
+    click.echo(Fore.GREEN + "\n".join(content))
     return resp.json()
 
 
+@get_data.command("applications")
 def get_applications():
     """Returns a list of applications."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
@@ -70,25 +58,14 @@ def get_applications():
         for application in resp.json()
         if not application.get("name") in live_site_applications
     ]
-    print(
-        Fore.GREEN
-        + """
-**** Applications ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(applications))
+    click.echo(Fore.GREEN + "\n".join(applications))
     return resp.json()
 
 
+@get_data.command("live-sites")
 def get_live_sites():
     """Returns a list of active websites."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") for site in resp.json()]
-    print(
-        Fore.GREEN
-        + """
-    **** Live Sites ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(live_sites))
+    click.echo(Fore.GREEN + "\n".join(live_sites))
     return resp.json()
