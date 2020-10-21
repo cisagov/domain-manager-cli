@@ -1,4 +1,4 @@
-"""Categorization controller."""
+"""Categorization controller. Mac and linux compatible."""
 # Standard Python Libraries
 # mypy: ignore-errors
 # flake8: noqa

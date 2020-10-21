@@ -1,11 +1,19 @@
 """A sample python script."""
 # Third-Party Libraries
+import click
 from colorama import Fore
 import requests
 from utils.settings import URL, auth
 
 
-def get_domain_list():
+@click.group()
+def get_data():
+    """Get available data."""
+    pass
+
+
+@get_data.command("domains")
+def get_domains():
     """Returns a list of available domains from Route53."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") + "." for site in resp.json()]
@@ -16,18 +24,12 @@ def get_domain_list():
         for domain in resp.json()
         if not domain.get("Name") in live_sites
     ]
-
-    print(
-        Fore.GREEN
-        + """
-**** Domains ****
-    """
-    )
     print(Fore.GREEN + "\n".join(domains))
     return resp.json()
 
 
-def get_website_content_list():
+@get_data.command("content")
+def get_website_content():
     """Returns a list of available website content from S3."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_site_contents = [site.get("website").get("name") for site in resp.json()]
@@ -38,18 +40,12 @@ def get_website_content_list():
         for content in resp.json()
         if not content.get("name") in live_site_contents
     ]
-
-    print(
-        Fore.GREEN
-        + """
-**** Website Content ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(content))
+    click.echo(Fore.GREEN + "\n".join(content))
     return resp.json()
 
 
-def get_application_list():
+@get_data.command("applications")
+def get_applications():
     """Returns a list of applications."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_site_applications = [
@@ -62,25 +58,14 @@ def get_application_list():
         for application in resp.json()
         if not application.get("name") in live_site_applications
     ]
-    print(
-        Fore.GREEN
-        + """
-**** Applications ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(applications))
+    click.echo(Fore.GREEN + "\n".join(applications))
     return resp.json()
 
 
-def get_live_site_list():
+@get_data.command("live-sites")
+def get_live_sites():
     """Returns a list of active websites."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") for site in resp.json()]
-    print(
-        Fore.GREEN
-        + """
-    **** Live Sites ****
-    """
-    )
-    print(Fore.GREEN + "\n".join(live_sites))
+    click.echo(Fore.GREEN + "\n".join(live_sites))
     return resp.json()

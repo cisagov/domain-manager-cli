@@ -1,16 +1,23 @@
 """DNS record handler."""
 # Third-Party Libraries
+import click
 import requests
 from utils.message_handling import error_msg, success_msg
 from utils.settings import URL, auth
 
 
-def generate_hosted_zones():
-    """Generate Route53 Hosted Zones for specified domains."""
-    text_file_name = input("Please your txt file name: ")
+@click.group()
+def hosted_zones():
+    """Manage AWS Route53 Hosted Zones for registered domains."""
+    pass
 
+
+@hosted_zones.command("generate")
+@click.option("-f", "--filename", help="Enter your .txt filename.")
+def generate_hosted_zones(filename):
+    """Generate Route53 Hosted Zones for specified domains."""
     post_data = {}
-    with open(f"text_files/{text_file_name}.txt", "r") as reader:
+    with open(f"../../text_files/{filename}", "r") as reader:
         post_data["domains"] = [line.replace("\n", "") for line in reader]
 
     resp = requests.post(f"{URL}/api/generate-dns/", headers=auth, json=post_data)
