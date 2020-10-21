@@ -1,4 +1,4 @@
-"""Categorization controller."""
+"""Categorization controller. Windows compatible."""
 # Standard Python Libraries
 # mypy: ignore-errors
 # flake8: noqa
@@ -9,11 +9,9 @@ import time
 # Third-Party Libraries
 from dotenv import load_dotenv
 from selenium import webdriver
-from src.proxies import bluecoat
-from src.proxies import fortiguard
-from src.proxies import palo_alto
-from src.proxies import trendmicro
-from src.proxies import trusted_source
+
+# cisagov Libraries
+from src.proxies import bluecoat, fortiguard, palo_alto, trendmicro, trusted_source
 
 # Load environment variables from .env file
 load_dotenv()
