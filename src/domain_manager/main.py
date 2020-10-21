@@ -2,6 +2,7 @@
 # Third-Party Libraries
 import click
 from colorama import Fore
+from scripts.active_sites import active_sites
 from scripts.dns_record_handler import hosted_zones
 from scripts.get_data import get_data
 
@@ -25,6 +26,7 @@ if __name__ == "__main__":
     # add command groups to the cli
     cli.add_command(get_data)
     cli.add_command(hosted_zones)
+    cli.add_command(active_sites)
 
     # Run the command line application
     cli()

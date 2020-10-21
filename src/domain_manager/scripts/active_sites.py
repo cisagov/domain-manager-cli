@@ -1,8 +1,15 @@
 """A sample python script."""
 # Third-Party Libraries
+import click
 import requests
 from utils.message_handling import error_msg, success_msg
 from utils.settings import URL, auth
+
+
+@click.group()
+def active_sites():
+    """Manage active site."""
+    pass
 
 
 def get_domains():
@@ -29,6 +36,7 @@ def get_live_sites():
     return resp.json()
 
 
+@active_sites.command("launch")
 def launch_live_site():
     """
     Launch a live website.
@@ -85,6 +93,7 @@ def launch_live_site():
     return resp.json()
 
 
+@active_sites.command("delete")
 def delete_live_site():
     """
     Deactivate an active site.
