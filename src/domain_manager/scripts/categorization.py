@@ -35,7 +35,9 @@ def categories_list():
 
 
 @categories.command("categorize")
-@click.option("-s", "--site-name", help="Enter your live site domain name")
+@click.option(
+    "-s", "--site-name", required=True, help="Enter your live site domain name"
+)
 def categorize_live_site(site_name):
     """
     Categorize an active site.

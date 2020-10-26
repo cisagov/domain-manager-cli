@@ -37,7 +37,8 @@ def get_live_sites():
 
 
 @active_sites.command("launch")
-def launch_live_site():
+@click.option("-d", "--domain-name", required=True, help="Enter your domain name")
+def launch_live_site(domain_name):
     """
     Launch a live website.
 
@@ -46,10 +47,7 @@ def launch_live_site():
     A Registered Domain.
     Website content URL.
     """
-    use_ip = input("Utilize an existing IP address? [Y]es or [N]o ")
-    domain_name = input("Please enter an available domain name: ")
-    application_name = input("Please enter an available application name: ")
-    domain_name = f"{domain_name}."
+    domain_name = f"{domain_name}"
     # Access data by their uuids
     domain_id = "".join(
         domain.get("_id")
@@ -57,6 +55,9 @@ def launch_live_site():
         if domain_name == domain.get("Name")
     )
 
+    use_ip = input("Utilize an existing IP address? [Y]es or [N]o ")
+
+    application_name = input("Please enter an available application name: ")
     application_id = "".join(
         application.get("_id")
         for application in get_applications()
@@ -94,19 +95,17 @@ def launch_live_site():
 
 
 @active_sites.command("delete")
-def delete_live_site():
+@click.option("-d", "--domain-name", required=True, help="Enter your domain name")
+def delete_live_site(domain_name):
     """
     Deactivate an active site.
 
     Unhook domain name by removing DNS records.
     Delete the live S3 bucket if applicable.
     """
-    # Define the desired site name from list
-    site_name = input("Please enter site name: ")
-
     # Access live site data by uuid
     live_site_id = "".join(
-        site.get("_id") for site in get_live_sites() if site_name == site.get("name")
+        site.get("_id") for site in get_live_sites() if domain_name == site.get("name")
     )
 
     resp = requests.delete(f"{URL}/api/live-site/{live_site_id}/", headers=auth)
