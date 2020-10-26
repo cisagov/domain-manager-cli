@@ -7,10 +7,11 @@ setup(
     version="0.1",
     py_modules=["domain-manager"],
     install_requires=[
+        "Click",
         "colorama",
     ],
     entry_points="""
         [console_scripts]
-        domain-manager=main:cli
+        main=main:cli
     """,
 )
