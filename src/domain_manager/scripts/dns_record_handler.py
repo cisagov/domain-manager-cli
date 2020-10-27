@@ -38,3 +38,20 @@ def generate_hosted_zones(filename):
     )
     success_msg("\nPlease check output.txt to retrieve your nameservers")
     return resp.json()
+
+
+@hosted_zones.command("delete")
+@click.option("-f", "--filename", required=True, help="Enter your .txt filename.")
+def delete_hosted_zones(filename):
+    """Delete AWS Hosted Zone for the specified domain names."""
+    post_data = {}
+    with open(f"../../text_files/{filename}", "r") as reader:
+        post_data["domains"] = [line.replace("\n", "") for line in reader]
+    resp = requests.delete(f"{URL}/api/generate-dns/", headers=auth, json=post_data)
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+    success_msg("\nDeleted.")
+    return resp.json()
