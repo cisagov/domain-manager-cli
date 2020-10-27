@@ -13,7 +13,7 @@ def hosted_zones():
 
 
 @hosted_zones.command("generate")
-@click.option("-f", "--filename", help="Enter your .txt filename.")
+@click.option("-f", "--filename", required=True, help="Enter your .txt filename.")
 def generate_hosted_zones(filename):
     """Generate Route53 Hosted Zones for specified domains."""
     post_data = {}
