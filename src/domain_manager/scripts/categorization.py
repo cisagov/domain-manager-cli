@@ -19,7 +19,6 @@ def get_live_sites():
     return resp.json()
 
 
-@categories.command("list")
 def get_categories():
     """Returns a list of categories."""
     resp = requests.get(f"{URL}/api/categories/", headers=auth)
@@ -28,20 +27,26 @@ def get_categories():
     return resp.json()
 
 
+@categories.command("list")
+def categories_list():
+    """Returns a list of categories."""
+    resp = get_categories()
+    return resp
+
+
 @categories.command("categorize")
-def categorize_live_site():
+@click.option(
+    "-s", "--site-name", required=True, help="Enter your live site domain name"
+)
+def categorize_live_site(site_name):
     """
     Categorize an active site.
 
     Check if the domain has already been categorized.
     Categorize the domain on multiple proxies.
     """
-    # Define the desired site name from list
-    site_name = input("Please enter site name: ")
-
-    categories = [category.get("name") for category in get_categories()]
-
-    click.echo(Fore.LIGHTBLUE_EX + "\n".join(categories) + Fore.WHITE)
+    # List available categories
+    get_categories()
 
     # Choose a category
     category_name = input("Please enter a category: ")
@@ -50,7 +55,7 @@ def categorize_live_site():
     live_site_id = "".join(
         site.get("_id")
         for site in get_live_sites()
-        if site_name == site.get("domain").get("Name")
+        if site_name in site.get("domain").get("Name")
     )
 
     resp = requests.get(
