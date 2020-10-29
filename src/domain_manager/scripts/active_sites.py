@@ -112,7 +112,9 @@ def delete_live_site(domain_name):
         site.get("_id") for site in get_live_sites() if domain_name == site.get("name")
     )
 
-    click.echo(click.style("deleting...", fg="yellow"))
+    click.echo(
+        click.style("deleting... this may take up to a few minutes.", fg="yellow")
+    )
 
     resp = requests.delete(f"{URL}/api/live-site/{live_site_id}/", headers=auth)
     success_msg(resp.json()["message"])
