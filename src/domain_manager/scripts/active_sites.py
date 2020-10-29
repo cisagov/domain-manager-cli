@@ -82,6 +82,10 @@ def launch_live_site(domain_name):
         )
         post_data["website_id"] = content_id
 
+    click.echo(
+        click.style("launching... this may take up to a few minutes.", fg="yellow")
+    )
+
     resp = requests.post(f"{URL}/api/live-sites/", headers=auth, json=post_data)
 
     try:
