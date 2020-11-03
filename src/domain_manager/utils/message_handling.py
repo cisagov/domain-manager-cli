@@ -1,17 +1,26 @@
 """Return messages handler."""
 # Third-Party Libraries
 import click
-from colorama import Fore
+
+
+def info_msg(text):
+    """Informational message."""
+    click.echo(click.style(text, fg="cyan"))
 
 
 def success_msg(text):
     """Success message."""
-    click.echo(Fore.LIGHTGREEN_EX + text + Fore.WHITE)
+    click.echo(click.style(text, fg="bright_green"))
+
+
+def warning_msg(text):
+    """Warning message."""
+    click.echo(click.style(text, fg="yellow"))
 
 
 def error_msg(text):
     """Error message."""
-    click.echo(Fore.LIGHTRED_EX + text + Fore.WHITE)
+    click.echo(click.style(text, fg="red"))
 
 
 def unknown_command():
