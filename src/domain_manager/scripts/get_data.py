@@ -1,8 +1,8 @@
 """A sample python script."""
 # Third-Party Libraries
 import click
-from colorama import Fore
 import requests
+from utils.message_handling import success_msg, success_msg_via_pager
 from utils.settings import URL, auth
 
 
@@ -24,7 +24,7 @@ def get_domains():
         for domain in resp.json()
         if not domain.get("Name") in live_sites
     ]
-    print(Fore.GREEN + "\n".join(domains))
+    success_msg_via_pager("\n".join(domains))
     return resp.json()
 
 
@@ -40,7 +40,7 @@ def get_website_content():
         for content in resp.json()
         if not content.get("name") in live_site_contents
     ]
-    click.echo(Fore.GREEN + "\n".join(content))
+    success_msg_via_pager("\n".join(content))
     return resp.json()
 
 
@@ -58,7 +58,7 @@ def get_applications():
         for application in resp.json()
         if not application.get("name") in live_site_applications
     ]
-    click.echo(Fore.GREEN + "\n".join(applications))
+    success_msg("\n".join(applications))
     return resp.json()
 
 
@@ -67,5 +67,5 @@ def get_live_sites():
     """Returns a list of active websites."""
     resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
     live_sites = [site.get("name") for site in resp.json()]
-    click.echo(Fore.GREEN + "\n".join(live_sites))
+    success_msg("\n".join(live_sites))
     return resp.json()

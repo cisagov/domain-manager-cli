@@ -1,11 +1,11 @@
 """Domain Manager main script."""
 # Third-Party Libraries
 import click
-from colorama import Fore
 from scripts.active_sites import active_sites
 from scripts.categorization import categories
 from scripts.dns_record_handler import hosted_zones
 from scripts.get_data import get_data
+from utils.message_handling import info_msg
 
 
 @click.group()
@@ -15,6 +15,9 @@ def cli():
 
 
 if __name__ == "__main__":
+    # clear terminal
+    click.clear()
+
     header = """\
  ____                    _         _____                               
 |    \  ___  _____  ___ |_| ___   |     | ___  ___  ___  ___  ___  ___ 
@@ -22,7 +25,7 @@ if __name__ == "__main__":
 |____/ |___||_|_|_||__,||_||_|_|  |_|_|_||__,||_|_||__,||_  ||___||_|  
                                                         |___|          
     """
-    click.echo(Fore.CYAN + header)
+    info_msg(header)
 
     # add command groups to the cli
     cli.add_command(get_data)

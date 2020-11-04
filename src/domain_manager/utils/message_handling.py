@@ -13,6 +13,11 @@ def success_msg(text):
     click.echo(click.style(text, fg="bright_green"))
 
 
+def success_msg_via_pager(text):
+    """Success message."""
+    click.echo_via_pager(click.style(text, fg="green"))
+
+
 def warning_msg(text):
     """Warning message."""
     click.echo(click.style(text, fg="yellow"))
