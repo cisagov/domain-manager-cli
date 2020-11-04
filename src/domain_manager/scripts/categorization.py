@@ -1,7 +1,6 @@
 """Check a domain's categories."""
 # Third-Party Libraries
 import click
-from colorama import Fore
 import requests
 from utils.message_handling import error_msg, success_msg
 from utils.settings import URL, auth
@@ -91,7 +90,7 @@ def check_categories():
         return
 
     for key, value in resp.json().items():
-        click.echo(Fore.GREEN + key + ": " + Fore.WHITE)
+        success_msg(key + ": ")
         if value is not None:
             success_msg(value)
     return resp.json()
