@@ -10,7 +10,7 @@ Domain Categorization and Management Scripts
 
 ## Contributing
 
-We welcome contributions!  Please see [here](CONTRIBUTING.md) for
+We welcome contributions! Please see [here](CONTRIBUTING.md) for
 details.
 
 ## License

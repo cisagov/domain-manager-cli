@@ -1,17 +1,11 @@
 """Categorization controller. Windows compatible."""
 # Standard Python Libraries
-# mypy: ignore-errors
-# flake8: noqa
-# Standard Python Libraries
 import os
 import time
 
 # Third-Party Libraries
 from dotenv import load_dotenv
 from selenium import webdriver
-
-# cisagov Libraries
-from src.proxies import bluecoat, fortiguard, palo_alto, trendmicro, trusted_source
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,7 +14,6 @@ api_key = os.getenv("TWO_CAPTCHA")
 
 def categorization_manager(domain_url):
     """Categorize site with all proxies in proxies folder."""
-
     print(os.getcwd())
     # Submit domain to proxy
     proxies = os.listdir("./src/proxies")

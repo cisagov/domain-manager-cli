@@ -7,26 +7,29 @@ from scripts.dns_record_handler import hosted_zones
 from scripts.get_data import get_data
 from utils.message_handling import info_msg
 
-
-@click.group()
-def cli():
-    """Domain manager command line application."""
-    pass
-
-
-if __name__ == "__main__":
-    # clear terminal
-    click.clear()
-
-    header = """\
- ____                    _         _____                               
+HEADER = """\
+____                    _         _____                               
 |    \  ___  _____  ___ |_| ___   |     | ___  ___  ___  ___  ___  ___ 
 |  |  || . ||     || .'|| ||   |  | | | || .'||   || .'|| . || -_||  _|
 |____/ |___||_|_|_||__,||_||_|_|  |_|_|_||__,||_|_||__,||_  ||___||_|  
-                                                        |___|          
-    """
-    info_msg(header)
+                                                    |___|          
+"""
 
+CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
+
+
+@click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
+    """Domain manager command line application."""
+    if ctx.invoked_subcommand is None:
+        info_msg(HEADER)
+        print(ctx.command.get_help(ctx))
+    pass
+
+
+def start():
+    """The main method called by __main__."""
     # add command groups to the cli
     cli.add_command(get_data)
     cli.add_command(hosted_zones)
@@ -35,3 +38,7 @@ if __name__ == "__main__":
 
     # Run the command line application
     cli()
+
+
+if __name__ == "__main__":
+    start()
