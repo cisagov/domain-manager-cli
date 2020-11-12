@@ -29,6 +29,7 @@ def cli(ctx):
 
 
 def start():
+    """The main method called by __main__."""
     # add command groups to the cli
     cli.add_command(get_data)
     cli.add_command(hosted_zones)
