@@ -4,10 +4,6 @@ name: build
 on:
   pull_request:
 
-env:
-  PIP_CACHE_DIR: ~/.cache/pip
-  PRE_COMMIT_CACHE_DIR: ~/.cache/pre-commit
-
 jobs:
   lint:
     runs-on: ubuntu-latest
