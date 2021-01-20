@@ -21,8 +21,8 @@ def categorization_manager(domain_url, category_name):
     # Submit domain to proxy
     proxies = os.listdir("proxies")
     for proxy in proxies:
+        driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
         try:
-            driver = webdriver.Chrome(executable_path="../../drivers/chromedriver")
             exec(
                 open(f"./proxies/{proxy}").read(),
                 {
