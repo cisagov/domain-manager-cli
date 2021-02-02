@@ -1,4 +1,5 @@
 2captcha-python==1.0.3
+altgraph==0.17
 appdirs==1.4.4
 appnope==0.1.0
 attrs==20.1.0
@@ -16,8 +17,10 @@ identify==1.4.29
 idna==2.10
 iniconfig==1.0.1
 ipdb==0.13.3
+ipython==7.19.0
 ipython-genutils==0.2.0
 jedi==0.17.2
+macholib==1.14
 more-itertools==8.4.0
 mypy-extensions==0.4.3
 nodeenv==1.5.0
@@ -27,17 +30,19 @@ pathspec==0.8.0
 pexpect==4.8.0
 pickleshare==0.7.5
 pluggy==0.13.1
+pre-commit==2.8.2
 prompt-toolkit==3.0.6
 ptyprocess==0.6.0
 py==1.9.0
 Pygments==2.6.1
+pyinstaller==4.0
+pyinstaller-hooks-contrib==2020.10
 pyparsing==2.4.7
 pytest==6.0.1
 python-dotenv==0.14.0
 PyYAML==5.3.1
 regex==2020.7.14
 requests==2.24.0
-selenium==3.141.0
 six==1.15.0
 toml==0.10.1
 traitlets==4.3.3
