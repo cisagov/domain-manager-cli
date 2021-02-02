@@ -47,17 +47,8 @@ def get_website_content():
 @get_data.command("applications")
 def get_applications():
     """Returns a list of applications."""
-    resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
-    live_site_applications = [
-        site.get("application").get("name") for site in resp.json()
-    ]
-
     resp = requests.get(f"{URL}/api/applications/", headers=auth)
-    applications = [
-        application.get("name")
-        for application in resp.json()
-        if not application.get("name") in live_site_applications
-    ]
+    applications = [application.get("name") for application in resp.json()]
     success_msg("\n".join(applications))
     return resp.json()
 
