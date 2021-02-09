@@ -67,5 +67,5 @@ def takedown_site(domain_name):
 
     resp = requests.delete(f"{URL}/api/domain/{site_id}/launch/", headers=auth)
 
-    success_msg(resp.json()["success"])
+    success_msg(f"{domain_name} is now inactive")
     return resp.json()
