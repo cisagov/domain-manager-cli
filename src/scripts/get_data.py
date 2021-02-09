@@ -28,7 +28,7 @@ def get_applications():
 
 @get_data.command("domains")
 def get_domains():
-    """Returns a list of domains."""
+    """Returns all domains."""
     resp = requests.get(f"{URL}/api/domains/", headers=auth)
     try:
         resp.raise_for_status()
@@ -41,9 +41,24 @@ def get_domains():
     return resp.json()
 
 
+@get_data.command("inactive-sites")
+def get_inactive_sites():
+    """Returns domains that are available for use."""
+    resp = requests.get(f"{URL}/api/domains/", headers=auth)
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+
+    sites = [site.get("name") for site in resp.json() if site.get("is_active") is False]
+    success_msg("\n".join(sites))
+    return resp.json()
+
+
 @get_data.command("live-sites")
 def get_live_sites():
-    """Returns a list of domains that are currently live."""
+    """Returns domains that are currently live."""
     resp = requests.get(f"{URL}/api/domains/", headers=auth)
     try:
         resp.raise_for_status()
@@ -58,7 +73,7 @@ def get_live_sites():
 
 @get_data.command("users")
 def get_users():
-    """Returns a list of users."""
+    """Returns all users."""
     resp = requests.get(f"{URL}/api/users/", headers=auth)
     try:
         resp.raise_for_status()
