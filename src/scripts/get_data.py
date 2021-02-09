@@ -56,8 +56,8 @@ def get_inactive_sites():
     return resp.json()
 
 
-@get_data.command("live-sites")
-def get_live_sites():
+@get_data.command("active-sites")
+def get_active_sites():
     """Returns domains that are currently live."""
     resp = requests.get(f"{URL}/api/domains/", headers=auth)
     try:

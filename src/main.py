@@ -1,10 +1,10 @@
 """Domain Manager main script."""
 # Third-Party Libraries
 import click
-from scripts.active_sites import active_sites
 from scripts.categorization import categories
 from scripts.dns_record_handler import hosted_zones
 from scripts.get_data import get_data
+from scripts.manage_sites import manage_sites
 from utils.message_handling import info_msg
 
 HEADER = """\
@@ -33,7 +33,7 @@ def start():
     # add command groups to the cli
     cli.add_command(get_data)
     cli.add_command(hosted_zones)
-    cli.add_command(active_sites)
+    cli.add_command(manage_sites)
     cli.add_command(categories)
 
     # Run the command line application
