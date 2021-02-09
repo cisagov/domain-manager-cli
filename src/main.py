@@ -2,7 +2,6 @@
 # Third-Party Libraries
 import click
 from scripts.categorization import categories
-from scripts.dns_record_handler import hosted_zones
 from scripts.get_data import get_data
 from scripts.manage_sites import manage_sites
 from utils.message_handling import info_msg
@@ -32,7 +31,6 @@ def start():
     """The main method called by __main__."""
     # add command groups to the cli
     cli.add_command(get_data)
-    cli.add_command(hosted_zones)
     cli.add_command(manage_sites)
     cli.add_command(categories)
 
