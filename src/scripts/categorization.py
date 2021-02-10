@@ -14,8 +14,14 @@ def categories():
 
 def get_live_sites():
     """Returns a list of active websites."""
-    resp = requests.get(f"{URL}/api/live-sites/", headers=auth)
-    return resp.json()
+    resp = requests.get(f"{URL}/api/domains/", headers=auth)
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+
+    return [site for site in resp.json() if site.get("is_active") is True]
 
 
 def get_categories():
@@ -26,18 +32,11 @@ def get_categories():
     return resp.json()
 
 
-@categories.command("list")
-def categories_list():
-    """Returns a list of categories."""
-    resp = get_categories()
-    return resp
-
-
 @categories.command("categorize")
 @click.option(
-    "-s", "--site-name", required=True, help="Enter your live site domain name"
+    "-d", "--domain", required=True, help="Enter your active site's domain name"
 )
-def categorize_live_site(site_name):
+def categorize_live_site(domain):
     """
     Categorize an active site.
 
@@ -51,14 +50,12 @@ def categorize_live_site(site_name):
     category_name = input("Please enter a category: ")
 
     # Access live site data by uuid
-    live_site_id = "".join(
-        site.get("_id")
-        for site in get_live_sites()
-        if site_name in site.get("domain").get("Name")
+    site_id = "".join(
+        site.get("_id") for site in get_live_sites() if domain in site["name"]
     )
 
     resp = requests.get(
-        f"{URL}/api/categorize/{live_site_id}/?category={category_name}", headers=auth
+        f"{URL}/api/domain/{site_id}/categorize/?category={category_name}", headers=auth
     )
 
     try:
@@ -67,30 +64,6 @@ def categorize_live_site(site_name):
         error_msg(str(e))
         return
 
-    resp_json = resp.json()
+    success_msg(resp.text)
 
-    if resp_json.get("error"):
-        error_msg(resp_json["error"])
-    else:
-        success_msg(resp_json["message"])
-
-    return resp_json
-
-
-@categories.command("check")
-def check_categories():
-    """Check a domain's categories on multiple proxies."""
-    domain = input("Please enter a domain name: ")
-    click.echo("Checking categories...")
-    resp = requests.get(f"{URL}/api/check/?domain={domain}", headers=auth)
-    try:
-        resp.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        error_msg(str(e))
-        return
-
-    for key, value in resp.json().items():
-        success_msg(key + ": ")
-        if value is not None:
-            success_msg(value)
-    return resp.json()
+    return resp.text
