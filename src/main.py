@@ -4,6 +4,7 @@ import click
 from scripts.categorization import categories
 from scripts.domains import manage_sites
 from scripts.get_data import get_data
+from scripts.templates import manage_templates
 from utils.message_handling import info_msg
 
 HEADER = """\
@@ -30,9 +31,10 @@ def cli(ctx):
 def start():
     """The main method called by __main__."""
     # add command groups to the cli
+    cli.add_command(categories)
     cli.add_command(get_data)
     cli.add_command(manage_sites)
-    cli.add_command(categories)
+    cli.add_command(manage_templates)
 
     # Run the command line application
     cli()
