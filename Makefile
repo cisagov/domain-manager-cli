@@ -14,9 +14,9 @@ help:
 venv:
 	source $(CURDIR)/.venv/bin/activate
 
-# target: init = load initial data to database
+# target: run = run cli application
 run:
-	python src/domain_manager/main.py
+	python src
 
 lint:
 	pre-commit autoupdate

@@ -3,12 +3,11 @@
 .python-version
 __pycache__
 /Lib
-/Scripts
 .venv/
 .env
 
 # VS Code
 .vscode
 
-output.txt
-/src/template/templates
+# Upload
+uploads/
