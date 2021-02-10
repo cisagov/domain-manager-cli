@@ -2,8 +2,8 @@
 # Third-Party Libraries
 import click
 from scripts.categorization import categories
+from scripts.domains import manage_sites
 from scripts.get_data import get_data
-from scripts.manage_sites import manage_sites
 from utils.message_handling import info_msg
 
 HEADER = """\

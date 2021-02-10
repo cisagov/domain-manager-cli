@@ -16,7 +16,7 @@ venv:
 
 # target: run = run cli application
 run:
-	python src/main.py
+	python src
 
 lint:
 	pre-commit autoupdate
