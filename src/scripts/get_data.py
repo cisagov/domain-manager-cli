@@ -41,6 +41,21 @@ def get_domains():
     return resp.json()
 
 
+@get_data.command("active-sites")
+def get_active_sites():
+    """Returns domains that are currently live."""
+    resp = requests.get(f"{URL}/api/domains/", headers=auth)
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+
+    sites = [site.get("name") for site in resp.json() if site.get("is_active") is True]
+    success_msg("\n".join(sites))
+    return resp.json()
+
+
 @get_data.command("inactive-sites")
 def get_inactive_sites():
     """Returns domains that are available for use."""
@@ -56,18 +71,18 @@ def get_inactive_sites():
     return resp.json()
 
 
-@get_data.command("active-sites")
-def get_active_sites():
-    """Returns domains that are currently live."""
-    resp = requests.get(f"{URL}/api/domains/", headers=auth)
+@get_data.command("templates")
+def get_templates():
+    """Returns all templates."""
+    resp = requests.get(f"{URL}/api/templates/", headers=auth)
     try:
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
         error_msg(str(e))
         return
 
-    sites = [site.get("name") for site in resp.json() if site.get("is_active") is True]
-    success_msg("\n".join(sites))
+    templates = [template.get("name") for template in resp.json()]
+    success_msg("\n".join(templates))
     return resp.json()
 
 
