@@ -26,6 +26,20 @@ def get_applications():
     return resp.json()
 
 
+@get_data.command("categories")
+def get_categories():
+    """Return all categories for proxy submission."""
+    resp = requests.get(f"{URL}/api/categories/", headers=auth)
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+    categories = [category.get("name") for category in resp.json()]
+    success_msg("\n".join(categories))
+    return resp.json()
+
+
 @get_data.command("domains")
 def get_domains():
     """Returns all domains."""
