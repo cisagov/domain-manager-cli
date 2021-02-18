@@ -27,6 +27,30 @@ def get_sites(active=False):
         return [site for site in resp.json() if site.get("is_active") is False]
 
 
+@manage_sites.command("upload")
+@click.option("-d", "--domain-name", required=True, help="Enter your domain name")
+@click.option("-f", "--filename", required=True, help="Enter your .zip filename.")
+def upload_website(domain_name, filename):
+    """Upload a zipped website file."""
+    site_id = "".join(
+        site["_id"] for site in get_sites(active=False) if domain_name == site["name"]
+    )
+    with open(f"./src/uploads/{filename}", "rb") as zip_file:
+        content = zip_file.read()
+        resp = requests.post(
+            f"{URL}/api/domain/{site_id}/content/?category={filename}",
+            files={"zip": (filename, content)},
+            headers=auth,
+        )
+        try:
+            resp.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            error_msg(str(e))
+            return
+        success_msg(f"{filename} has been uploaded to {domain_name}")
+        return resp.json()
+
+
 @manage_sites.command("launch")
 @click.option("-d", "--domain-name", required=True, help="Enter your domain name")
 def launch_site(domain_name):
