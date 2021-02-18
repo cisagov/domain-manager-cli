@@ -51,6 +51,26 @@ def upload_website(domain_name, filename):
         return resp.json()
 
 
+@manage_sites.command("delete")
+@click.option("-d", "--domain-name", required=True, help="Enter your domain name")
+def delete_website(domain_name):
+    """Delete content from a domain."""
+    site_id = "".join(
+        site["_id"] for site in get_sites(active=False) if domain_name == site["name"]
+    )
+    resp = requests.delete(
+        f"{URL}/api/domain/{site_id}/content/",
+        headers=auth,
+    )
+    try:
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        error_msg(str(e))
+        return
+    success_msg(f"Content has been deleted from {domain_name}")
+    return resp.json()
+
+
 @manage_sites.command("launch")
 @click.option("-d", "--domain-name", required=True, help="Enter your domain name")
 def launch_site(domain_name):
