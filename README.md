@@ -1,12 +1,15 @@
-# Domain Manager Script
+# Domain Manager CLI
 
-Domain Categorization and Management Scripts
+Domain Management Command Line Interface
 
 ## Run scripts
 
 1. Copy your env vars:
 
-   - `cp etc/env.dist src/scripts/.env`
+   - `cp etc/env.dist .env`
+
+2. Run the CLI application
+   - `make run`
 
 ## Contributing
 
