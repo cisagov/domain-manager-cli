@@ -35,7 +35,7 @@ def get_categories():
     except requests.exceptions.HTTPError as e:
         error_msg(str(e))
         return
-    categories = [category.get("name") for category in resp.json()]
+    categories = [category for category in resp.json()]
     success_msg("\n".join(categories))
     return resp.json()
 
