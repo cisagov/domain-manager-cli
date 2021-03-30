@@ -33,13 +33,13 @@ pre-commit==2.10.1
 prompt-toolkit==3.0.6
 ptyprocess==0.6.0
 py==1.9.0
-Pygments==2.6.1
+Pygments==2.7.4
 pyinstaller==4.0
 pyinstaller-hooks-contrib==2020.10
 pyparsing==2.4.7
 pytest==6.0.1
 python-dotenv==0.14.0
-PyYAML==5.3.1
+PyYAML==5.4
 regex==2020.7.14
 requests==2.24.0
 six==1.15.0
