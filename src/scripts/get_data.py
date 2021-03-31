@@ -98,18 +98,3 @@ def get_templates():
     templates = [template.get("name") for template in resp.json()]
     success_msg("\n".join(templates))
     return resp.json()
-
-
-@get_data.command("users")
-def get_users():
-    """Returns all users."""
-    resp = requests.get(f"{URL}/api/users/", headers=auth)
-    try:
-        resp.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        error_msg(str(e))
-        return
-
-    users = [user.get("Username") for user in resp.json()]
-    success_msg("\n".join(users))
-    return resp.json()
