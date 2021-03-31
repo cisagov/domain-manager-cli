@@ -25,7 +25,7 @@ def check_category(domain):
         return
 
     for proxy in resp.json():
-        success_msg("".join(f"{key}: {value}" for key, value in proxy.items()))
+        success_msg("\n".join(f"{key}: {value}" for key, value in proxy.items()))
     return resp.text
 
 
@@ -46,5 +46,7 @@ def categorize(domain, category):
         error_msg(str(e))
         return
 
-    success_msg(resp.text)
+    for proxy in resp.json():
+        success_msg("\n".join(f"{key}: {value}" for key, value in proxy.items()))
+
     return resp.text

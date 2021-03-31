@@ -66,6 +66,7 @@ def get_active_sites():
         return
 
     sites = [site.get("name") for site in resp.json() if site.get("is_active") is True]
+    sites.sort()
     success_msg("\n".join(sites))
     return resp.json()
 
@@ -81,6 +82,7 @@ def get_inactive_sites():
         return
 
     sites = [site.get("name") for site in resp.json() if site.get("is_active") is False]
+    sites.sort()
     success_msg("\n".join(sites))
     return resp.json()
 

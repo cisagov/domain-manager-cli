@@ -27,7 +27,7 @@ def get_live_sites():
 def get_categories():
     """Returns a list of categories."""
     resp = requests.get(f"{URL}/api/categories/", headers=auth)
-    category_names = "\n".join(category["name"] for category in resp.json())
+    category_names = "\n".join(category for category in resp.json())
     success_msg(category_names)
     return resp.json()
 
