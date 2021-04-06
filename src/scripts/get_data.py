@@ -12,18 +12,22 @@ def get_data():
     pass
 
 
-@get_data.command("applications")
-def get_applications():
-    """Returns a list of applications."""
+def get_applications_list():
+    """Returns a JSON list of applications."""
     resp = requests.get(f"{URL}/api/applications/", headers=auth)
     try:
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
         error_msg(str(e))
         return
-    applications = [application.get("name") for application in resp.json()]
-    success_msg("\n".join(applications))
     return resp.json()
+
+
+@get_data.command("applications")
+def get_applications():
+    """Returns a list of applications."""
+    applications = [application.get("name") for application in get_applications_list()]
+    success_msg("\n".join(applications))
 
 
 @get_data.command("categories")
@@ -37,11 +41,10 @@ def get_categories():
         return
     categories = [category for category in resp.json()]
     success_msg("\n".join(categories))
-    return resp.json()
 
 
 def get_domains_list():
-    """Return all domains."""
+    """Return a JSON list of domains."""
     resp = requests.get(f"{URL}/api/domains/", headers=auth)
     try:
         resp.raise_for_status()
@@ -52,9 +55,23 @@ def get_domains_list():
 
 
 @get_data.command("domains")
-def get_domains():
+@click.option(
+    "-g", "--group", required=False, help="Enter an application name in quotes"
+)
+def get_domains(group):
     """Returns all domains."""
-    domains = [domain.get("name") for domain in get_domains_list()]
+    application_id = "".join(
+        app["_id"] for app in get_applications_list() if app["name"] == group
+    )
+
+    if application_id:
+        domains = [
+            domain.get("name")
+            for domain in get_domains_list()
+            if domain["application_id"] == application_id
+        ]
+    else:
+        domains = [domain.get("name") for domain in get_domains_list()]
     success_msg("\n".join(domains))
 
 
