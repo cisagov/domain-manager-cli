@@ -40,51 +40,61 @@ def get_categories():
     return resp.json()
 
 
-@get_data.command("domains")
-def get_domains():
-    """Returns all domains."""
+def get_domains_list():
+    """Return all domains."""
     resp = requests.get(f"{URL}/api/domains/", headers=auth)
     try:
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
         error_msg(str(e))
         return
-
-    domains = [domain.get("name") for domain in resp.json()]
-    success_msg("\n".join(domains))
     return resp.json()
+
+
+@get_data.command("domains")
+def get_domains():
+    """Returns all domains."""
+    domains = [domain.get("name") for domain in get_domains_list()]
+    success_msg("\n".join(domains))
 
 
 @get_data.command("active-sites")
 def get_active_sites():
     """Returns domains that are currently live."""
-    resp = requests.get(f"{URL}/api/domains/", headers=auth)
-    try:
-        resp.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        error_msg(str(e))
-        return
-
-    sites = [site.get("name") for site in resp.json() if site.get("is_active") is True]
+    sites = [
+        site.get("name") for site in get_domains_list() if site.get("is_active") is True
+    ]
     sites.sort()
     success_msg("\n".join(sites))
-    return resp.json()
 
 
 @get_data.command("inactive-sites")
 def get_inactive_sites():
     """Returns domains that are available for use."""
-    resp = requests.get(f"{URL}/api/domains/", headers=auth)
+    sites = [
+        site.get("name")
+        for site in get_domains_list()
+        if site.get("is_active") is False
+    ]
+    sites.sort()
+    success_msg("\n".join(sites))
+
+
+@get_data.command("nameservers")
+@click.option("-d", "--domain", required=True, help="Enter a domain name")
+def get_nameservers(domain):
+    """Returns a domain's nameservers."""
+    domain_id = "".join(x["_id"] for x in get_domains_list() if x["name"] == domain)
+
+    resp = requests.get(f"{URL}/api/domain/{domain_id}/records/", headers=auth)
     try:
         resp.raise_for_status()
     except requests.exceptions.HTTPError as e:
         error_msg(str(e))
         return
-
-    sites = [site.get("name") for site in resp.json() if site.get("is_active") is False]
-    sites.sort()
-    success_msg("\n".join(sites))
-    return resp.json()
+    success_msg(
+        "\n".join(record["Value"] for record in resp.json()[0]["ResourceRecords"])
+    )
 
 
 @get_data.command("templates")
