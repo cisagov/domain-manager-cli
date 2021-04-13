@@ -1,11 +1,14 @@
 """Domain Manager main script."""
 # Third-Party Libraries
 import click
-from scripts.categorization import categories
-from scripts.domains import manage_sites
-from scripts.external import external
-from scripts.get_data import get_data
-from scripts.templates import manage_templates
+from groups.application import application
+from groups.category import category
+from groups.domain import domain
+from groups.external import external
+from groups.record import record
+from groups.template import template
+
+# cisagov Libraries
 from utils.message_handling import info_msg
 
 HEADER = """\
@@ -32,11 +35,12 @@ def cli(ctx):
 def start():
     """The main method called by __main__."""
     # add command groups to the cli
-    cli.add_command(categories)
+    cli.add_command(application)
+    cli.add_command(category)
+    cli.add_command(domain)
     cli.add_command(external)
-    cli.add_command(get_data)
-    cli.add_command(manage_sites)
-    cli.add_command(manage_templates)
+    cli.add_command(record)
+    cli.add_command(template)
 
     # Run the command line application
     cli()
