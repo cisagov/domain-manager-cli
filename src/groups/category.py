@@ -1,4 +1,8 @@
+"""Category CLI."""
+# Third-Party Libraries
 import click
+
+# cisagov Libraries
 from utils.categories import get_categories
 from utils.message_handling import success_msg
 

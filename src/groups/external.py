@@ -1,12 +1,11 @@
 """External domains not managed by DM."""
 # Third-Party Libraries
 import click
-import requests
 
 # cisagov Libraries
-from utils.message_handling import error_msg, success_msg
-from utils.settings import URL, auth
-from utils.external import check_category, categorize_external
+from utils.categories import get_categories
+from utils.external import categorize_external, check_category
+from utils.message_handling import success_msg
 
 
 @click.group()

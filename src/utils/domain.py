@@ -1,8 +1,13 @@
-from utils import api
+"""Domain methods for API."""
+# Standard Python Libraries
 import os
+
+# cisagov Libraries
+from utils import api
 
 
 def get_domains(params=""):
+    """Get all domains."""
     path = "/api/domains/"
     if params:
         path = f"{path}?{params}"
@@ -46,6 +51,7 @@ def update_record(domain: dict, record: dict):
 
 
 def upload_content(domain: dict, filepath: str):
+    """Upload website content."""
     with open(filepath, "rb") as zipfile:
         content = zipfile.read()
         filename = os.path.basename(filepath)
@@ -56,16 +62,20 @@ def upload_content(domain: dict, filepath: str):
 
 
 def delete_content(domain: dict):
+    """Delete website content."""
     return api.delete(f"/api/domain/{domain['_id']}/content/")
 
 
 def launch_site(domain: dict):
+    """Launch domain."""
     return api.get(f"/api/domain/{domain['id']}/launch/")
 
 
 def takedown_site(domain: dict):
+    """Takedown domain."""
     return api.delete(f"/api/domain/{domain['id']}/launch/")
 
 
 def categorize_site(domain: dict, category_name: str):
+    """Categorize domain."""
     return api.get(f"/api/domain/{domain['id']}/categorize/?category={category_name}")

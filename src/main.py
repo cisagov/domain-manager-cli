@@ -1,14 +1,14 @@
 """Domain Manager main script."""
 # Third-Party Libraries
 import click
+
+# cisagov Libraries
 from groups.application import application
 from groups.category import category
 from groups.domain import domain
 from groups.external import external
 from groups.record import record
 from groups.template import template
-
-# cisagov Libraries
 from utils.message_handling import info_msg
 
 HEADER = """\

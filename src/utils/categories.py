@@ -1,3 +1,5 @@
+"""Category methods for API."""
+# cisagov Libraries
 from utils import api
 
 

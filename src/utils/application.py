@@ -1,3 +1,5 @@
+"""Application methods to use against API."""
+# cisagov Libraries
 from utils import api
 
 

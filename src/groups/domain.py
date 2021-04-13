@@ -1,16 +1,20 @@
+"""Domain CLI."""
+# Third-Party Libraries
 import click
+
+# cisagov Libraries
 from utils.application import get_applications
+from utils.categories import get_categories
 from utils.domain import (
+    categorize_site,
     delete_content,
     get_domain,
-    get_hosted_zone,
     get_domains,
-    upload_content,
+    get_hosted_zone,
     launch_site,
     takedown_site,
-    categorize_site,
+    upload_content,
 )
-from utils.categories import get_categories
 from utils.message_handling import success_msg, warning_msg
 
 
@@ -63,13 +67,13 @@ def hostedzone(domain):
 
         if record.get("AliasTarget"):
             alias = record["AliasTarget"]
-            msg.append(f"AliasTarget:")
+            msg.append("AliasTarget:")
             msg.append(f"\tDNSName: {alias['DNSName']}")
             msg.append(f"\tEvaluateTargetHealth: {alias['EvaluateTargetHealth']}")
             msg.append(f"\tHostedZoneId: {alias['HostedZoneId']}")
         else:
             msg.append(f"TTL: {record['TTL']}")
-            msg.append(f"Values:")
+            msg.append("Values:")
             for value in record["ResourceRecords"]:
                 msg.append(f"\t{value['Value']}")
         msg.append("\n")
@@ -95,7 +99,7 @@ def upload(domain_name, filepath):
     domain = get_domain(domain_name)
     resp = upload_content(domain, filepath)
     if resp:
-        success_msg(f"{filename} has been uploaded to {domain_name}")
+        success_msg(f"{filepath} has been uploaded to {domain_name}")
 
 
 @domain.command("remove")
@@ -113,7 +117,7 @@ def remove(domain_name):
 def launch(domain_name):
     """Launch a domain."""
     domain = get_domain(domain_name)
-    resp = launch_site(domain)
+    launch_site(domain)
     warning_msg("launching... this may take up to a few minutes.")
 
 

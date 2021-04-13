@@ -1,6 +1,9 @@
 """CLI for managing records."""
+# Third-Party Libraries
 import click
-from utils.domain import get_domain, post_record, delete_record, update_record
+
+# cisagov Libraries
+from utils.domain import delete_record, get_domain, post_record, update_record
 from utils.message_handling import error_msg, success_msg
 
 
@@ -26,7 +29,7 @@ def get(domain):
         msg.append(f"Name: {record['name']}")
         msg.append(f"Type: {record['record_type']}")
         msg.append(f"TTL: {record['ttl']}")
-        msg.append(f"Config:")
+        msg.append("Config:")
 
         for k, v in record["config"].items():
             msg.append(f"\t{k}: {v}")
@@ -116,9 +119,9 @@ def update(domain_name, record_id):
 def prompt_config(record_type):
     """Prompt user for record config."""
     if record_type == "REDIRECT":
-        redirect_url = click.prompt(f"Enter domain to redirect to", type=str)
+        redirect_url = click.prompt("Enter domain to redirect to", type=str)
         protocol = click.prompt(
-            f"Enter protocol for redirects (http,https)",
+            "Enter protocol for redirects",
             type=click.Choice(["http", "https"]),
         )
         config = {"value": redirect_url, "protocol": protocol}
@@ -131,7 +134,7 @@ def prompt_config(record_type):
         lines.append(value)
         while value:
             value = click.prompt(
-                f"Enter another line value (Leave blank to confirm)", default=""
+                "Enter another line value (Leave blank to confirm)", default=""
             )
             if value:
                 lines.append(value)

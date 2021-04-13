@@ -1,4 +1,8 @@
+"""Application CLI."""
+# Third-Party Libraries
 import click
+
+# cisagov Libraries
 from utils.application import get_applications
 from utils.message_handling import success_msg
 

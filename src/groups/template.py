@@ -1,6 +1,10 @@
+"""Templates CLI."""
+# Third-Party Libraries
 import click
-from utils.templates import get_templates, upload_template
+
+# cisagov Libraries
 from utils.message_handling import success_msg
+from utils.templates import get_templates, upload_template
 
 
 @click.group()

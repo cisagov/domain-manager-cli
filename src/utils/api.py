@@ -1,9 +1,14 @@
+"""Functions to make requests against API."""
+# Third-Party Libraries
 import requests
+
+# cisagov Libraries
+from utils.message_handling import error_msg
 from utils.settings import URL, auth
-from utils.message_handling import error_msg, success_msg
 
 
 def get(path):
+    """Get."""
     resp = requests.get(f"{URL}{path}", headers=auth)
     try:
         resp.raise_for_status()
@@ -14,6 +19,7 @@ def get(path):
 
 
 def put(path, **kwargs):
+    """Put."""
     resp = requests.put(f"{URL}{path}", headers=auth, **kwargs)
     try:
         resp.raise_for_status()
@@ -24,6 +30,7 @@ def put(path, **kwargs):
 
 
 def post(path, **kwargs):
+    """Post."""
     resp = requests.post(f"{URL}{path}", headers=auth, **kwargs)
     try:
         resp.raise_for_status()
@@ -34,6 +41,7 @@ def post(path, **kwargs):
 
 
 def delete(path):
+    """Delete."""
     resp = requests.delete(f"{URL}{path}", headers=auth)
     try:
         resp.raise_for_status()
