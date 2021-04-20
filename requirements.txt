@@ -32,7 +32,7 @@ pluggy==0.13.1
 pre-commit==2.10.1
 prompt-toolkit==3.0.6
 ptyprocess==0.6.0
-py==1.9.0
+py==1.10.0
 Pygments==2.7.4
 pyinstaller==4.0
 pyinstaller-hooks-contrib==2020.10
