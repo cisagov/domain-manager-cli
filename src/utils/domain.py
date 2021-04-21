@@ -78,4 +78,6 @@ def takedown_site(domain: dict):
 
 def categorize_site(domain: dict, category_name: str):
     """Categorize domain."""
-    return api.get(f"/api/domain/{domain['_id']}/categorize/?category={category_name}")
+    return api.get(f"/api/domain/{domain['_id']}/categorize/?category={category_name}")[
+        "success"
+    ]
