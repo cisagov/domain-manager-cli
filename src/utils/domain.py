@@ -68,14 +68,14 @@ def delete_content(domain: dict):
 
 def launch_site(domain: dict):
     """Launch domain."""
-    return api.get(f"/api/domain/{domain['id']}/launch/")
+    return api.get(f"/api/domain/{domain['_id']}/launch/")
 
 
 def takedown_site(domain: dict):
     """Takedown domain."""
-    return api.delete(f"/api/domain/{domain['id']}/launch/")
+    return api.delete(f"/api/domain/{domain['_id']}/launch/")
 
 
 def categorize_site(domain: dict, category_name: str):
     """Categorize domain."""
-    return api.get(f"/api/domain/{domain['id']}/categorize/?category={category_name}")
+    return api.get(f"/api/domain/{domain['_id']}/categorize/?category={category_name}")
