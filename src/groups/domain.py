@@ -142,3 +142,21 @@ def categorize(domain_name):
     resp = categorize_site(domain, category_name)
     if resp:
         success_msg(resp)
+
+
+@domain.command("checkcategory")
+@click.option("-d", "--domain", required=True, prompt=True)
+def check_category(domain):
+    """Get a domain's category."""
+    domain = get_domain(domain)
+
+    if not domain.get("category_results"):
+        warning_msg("This domain has not yet been categorized.")
+        return
+
+    success_msg(
+        "\n".join(
+            f"{d.get('proxy')}: {d.get('submitted_category')}"
+            for d in domain.get("category_results")
+        )
+    )
