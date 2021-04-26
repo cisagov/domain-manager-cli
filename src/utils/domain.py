@@ -81,3 +81,8 @@ def categorize_site(domain: dict, category_name: str):
     return api.get(f"/api/domain/{domain['_id']}/categorize/?category={category_name}")[
         "success"
     ]
+
+
+def proxy_category_check(domain_id: str):
+    """Start check category process."""
+    return api.get(f"/api/domain/{domain_id}/categorize/")
