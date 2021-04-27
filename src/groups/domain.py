@@ -8,6 +8,7 @@ from utils.categories import get_categories
 from utils.domain import (
     categorize_site,
     delete_content,
+    generate_content,
     get_domain,
     get_domains,
     get_hosted_zone,
@@ -17,6 +18,7 @@ from utils.domain import (
     upload_content,
 )
 from utils.message_handling import success_msg, warning_msg
+from utils.templates import get_templates, template_attributes
 
 
 @click.group()
@@ -146,10 +148,10 @@ def categorize(domain_name):
 
 
 @domain.command("checkcategory")
-@click.option("-d", "--domain", required=True, prompt=True)
-def check_category(domain):
+@click.option("-d", "--domain-name", required=True, prompt=True)
+def check_category(domain_name):
     """Get a domain's category."""
-    domain = get_domain(domain_name=domain)
+    domain = get_domain(domain_name=domain_name)
     proxy_category_check(domain_id=domain.get("_id"))
 
     if not domain.get("category_results"):
@@ -163,3 +165,26 @@ def check_category(domain):
             for d in domain.get("category_results")
         ),
     )
+
+
+@domain.command("generate")
+@click.option("-d", "--domain-name", required=True, prompt=True)
+def generate(domain_name):
+    """Generate static content from a template."""
+    templates = [template.get("name") for template in get_templates()]
+
+    template_name = click.prompt(
+        "Please choose a template", type=click.Choice(templates)
+    )
+
+    domain = get_domain(domain_name=domain_name)
+
+    post_data = {}
+    for field, gen_data in template_attributes().items():
+        attribute = click.prompt(field, default=gen_data)
+        post_data[field] = attribute
+
+    resp = generate_content(
+        domain_id=domain.get("_id"), template_name=template_name, data=post_data
+    )
+    success_msg(resp["message"])
