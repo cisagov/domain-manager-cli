@@ -86,3 +86,10 @@ def categorize_site(domain: dict, category_name: str):
 def proxy_category_check(domain_id: str):
     """Start check category process."""
     return api.get(f"/api/domain/{domain_id}/categorize/")
+
+
+def generate_content(domain_id: str, template_name: str, data: dict):
+    """Generate static content from a template."""
+    return api.post(
+        f"/api/domain/{domain_id}/generate/?template_name={template_name}", json=data
+    )

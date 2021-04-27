@@ -11,6 +11,11 @@ def get_templates():
     return api.get("/api/templates/")
 
 
+def template_attributes():
+    """Get generated template attributes."""
+    return api.get("/api/templates/attributes/")
+
+
 def upload_template(filepath):
     """Upload template zip file."""
     with open(filepath, "rb") as zipfile:
