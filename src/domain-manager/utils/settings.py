@@ -1,38 +1,28 @@
 """Domain Manager Settings."""
 # Standard Python Libraries
 import os
-import sys
-
-# Third-Party Libraries
-from dotenv import load_dotenv
 
 # cisagov Libraries
+from groups.configure import configure, get_configuration
 from utils.message_handling import warning_msg
 
-# Load environment variables from .env file
-env_path = os.path.join(os.getcwd() + "/.env")
-load_dotenv(dotenv_path=env_path)
+# First get settings from env var
+URL = os.environ.get("DOMAIN_MANAGER_API_URL")
+API_KEY = os.environ.get("DOMAIN_MANAGER_API_KEY")
 
-URL = os.environ.get("API_URL")
-API_KEY = os.environ.get("API_KEY")
+# If no env var, get settings from file
+if not URL or not API_KEY:
+    configuration = get_configuration()
+    URL = configuration.get("api_url")
+    API_KEY = configuration.get("api_key")
 
-
-def dump_env():
-    """Create a new .env file."""
-    url_endpoint = input("Please provide the Domain Manager URL: ")
-    api_key = input("Please provide the API Key for access: ")
-
-    env_dump = f"API_URL={url_endpoint}\nAPI_KEY={api_key}"
-
-    env_file = open(".env", "w+")
-    env_file.write(env_dump)
-    env_file.close()
-
-
-if not URL:
-    warning_msg("You're environment variables are not setup yet.")
-    dump_env()
-    sys.exit("Success.. Please try again.")
+# If still no settings, configure settings
+if not URL or not API_KEY:
+    warning_msg("Environment not configured. Configuring environment.")
+    configure()
+    configuration = get_configuration()
+    URL = configuration.get("api_url")
+    API_KEY = configuration.get("api_key")
 
 # Pass in api key for authorized access
 auth = {"api_key": API_KEY}
