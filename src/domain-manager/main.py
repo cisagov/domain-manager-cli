@@ -3,6 +3,7 @@
 import click
 
 # cisagov Libraries
+from _version import __version__
 from groups.application import application
 from groups.category import category
 from groups.configure import configure
@@ -24,6 +25,7 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
+@click.version_option(__version__)
 @click.pass_context
 def cli(ctx):
     """Domain manager command line application."""
