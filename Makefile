@@ -16,7 +16,7 @@ venv:
 
 # target: run = run cli application
 run:
-	python src
+	python src/domain-manager/
 
 lint:
 	pre-commit autoupdate
