@@ -1,5 +1,5 @@
 #!/usr/bin/env pytest -vs
-"""Tests for example."""
+"""Tests for Domain Manager CLI."""
 
 # Standard Python Libraries
 import sys
