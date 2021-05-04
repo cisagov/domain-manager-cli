@@ -14,11 +14,11 @@ from groups.template import template
 from utils.message_handling import info_msg
 
 HEADER = """\
-____                    _         _____                               
-|    \  ___  _____  ___ |_| ___   |     | ___  ___  ___  ___  ___  ___ 
+____                    _         _____
+|    \\  ___  _____  ___ |_| ___   |     | ___  ___  ___  ___  ___  ___
 |  |  || . ||     || .'|| ||   |  | | | || .'||   || .'|| . || -_||  _|
-|____/ |___||_|_|_||__,||_||_|_|  |_|_|_||__,||_|_||__,||_  ||___||_|  
-                                                    |___|          
+|____/ |___||_|_|_||__,||_||_|_|  |_|_|_||__,||_|_||__,||_  ||___||_|
+                                                    |___|
 """
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
@@ -36,7 +36,7 @@ def cli(ctx):
 
 
 def start():
-    """The main method called by __main__."""
+    """Run cli."""
     # add command groups to the cli
     cli.add_command(application)
     cli.add_command(category)
