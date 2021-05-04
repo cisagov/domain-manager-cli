@@ -1,15 +1,12 @@
+*.egg-info
 .DS_Store
-
-# Python
-.mypy_cache
-.python-version
-__pycache__
-/Lib
-.venv/
+.coverage
 .env
-
-# VS Code
+.mypy_cache
+.pytest_cache
+.python-version
+.venv/
 .vscode
-
-# Upload
+/Lib
+__pycache__
 uploads/
