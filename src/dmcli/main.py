@@ -1,9 +1,9 @@
 """Domain Manager main script."""
 # Third-Party Libraries
+from _version import __version__
 import click
 
 # cisagov Libraries
-from _version import __version__
 from groups.application import application
 from groups.category import category
 from groups.configure import configure

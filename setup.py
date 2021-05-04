@@ -1,5 +1,6 @@
 """
 This is the setup module for the domain-manager-cli project.
+
 Based on:
 - https://packaging.python.org/distributing/
 - https://github.com/pypa/sampleproject/blob/master/setup.py
