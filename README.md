@@ -2,15 +2,6 @@
 
 Domain Management Command Line Interface
 
-## Run scripts
-
-1. Copy your env vars:
-
-   - `cp etc/env.dist .env`
-
-2. Run the CLI application
-   - `make run`
-
 ## Contributing
 
 We welcome contributions! Please see [here](CONTRIBUTING.md) for
