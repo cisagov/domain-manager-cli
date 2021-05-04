@@ -105,8 +105,9 @@ setup(
             # to never grab the regression version.
             "coveralls != 1.11.0",
             "pre-commit",
-            "pytest-cov",
             "pytest",
+            "pytest-cov",
+            "pytest-pythonpath",
         ]
     },
     # Conveniently allows one to run the CLI tool as `dmcli`
