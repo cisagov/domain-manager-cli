@@ -3,9 +3,9 @@
 import click
 
 # cisagov Libraries
-from utils.application import get_applications
-from utils.categories import get_categories
-from utils.domain import (
+from dmcli.utils.application import get_applications
+from dmcli.utils.categories import get_categories
+from dmcli.utils.domain import (
     categorize_site,
     delete_content,
     generate_content,
@@ -17,8 +17,8 @@ from utils.domain import (
     takedown_site,
     upload_content,
 )
-from utils.message_handling import success_msg, warning_msg
-from utils.templates import get_templates, template_attributes
+from dmcli.utils.message_handling import success_msg, warning_msg
+from dmcli.utils.templates import get_templates, template_attributes
 
 
 @click.group()

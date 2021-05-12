@@ -3,8 +3,8 @@
 import click
 
 # cisagov Libraries
-from utils.message_handling import success_msg
-from utils.templates import get_templates, upload_template
+from dmcli.utils.message_handling import success_msg
+from dmcli.utils.templates import get_templates, upload_template
 
 
 @click.group()

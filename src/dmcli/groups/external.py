@@ -3,9 +3,9 @@
 import click
 
 # cisagov Libraries
-from utils.categories import get_categories
-from utils.external import categorize_external, check_category
-from utils.message_handling import success_msg
+from dmcli.utils.categories import get_categories
+from dmcli.utils.external import categorize_external, check_category
+from dmcli.utils.message_handling import success_msg
 
 
 @click.group()

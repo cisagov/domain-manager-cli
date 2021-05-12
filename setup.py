@@ -81,9 +81,9 @@ setup(
     python_requires=">=3.6",
     # What does your project relate to?
     keywords="domain-manager",
-    packages=find_packages(where="src/dmcli"),
-    package_dir={"": "src/dmcli"},
-    py_modules=[splitext(basename(path))[0] for path in glob("src/dmcli/*.py")],
+    packages=find_packages(where="src/"),
+    package_dir={"": "src/"},
+    py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     include_package_data=True,
     install_requires=[
         "appdirs>=1.4.4",
@@ -105,8 +105,8 @@ setup(
             # to never grab the regression version.
             "coveralls != 1.11.0",
             "pre-commit",
-            "pytest-cov",
             "pytest",
+            "pytest-cov",
         ]
     },
     # Conveniently allows one to run the CLI tool as `dmcli`

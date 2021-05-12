@@ -1,6 +1,6 @@
 """External methods for API."""
 # cisagov Libraries
-from utils import api
+from dmcli.utils import api
 
 
 def check_category(domain_name):

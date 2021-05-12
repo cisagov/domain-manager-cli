@@ -3,8 +3,8 @@
 import click
 
 # cisagov Libraries
-from utils.domain import delete_record, get_domain, post_record, update_record
-from utils.message_handling import error_msg, success_msg
+from dmcli.utils.domain import delete_record, get_domain, post_record, update_record
+from dmcli.utils.message_handling import error_msg, success_msg
 
 
 @click.group()
