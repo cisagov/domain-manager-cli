@@ -1,17 +1,18 @@
 """Domain Manager main script."""
 # Third-Party Libraries
-from _version import __version__
 import click
 
 # cisagov Libraries
-from groups.application import application
-from groups.category import category
-from groups.configure import configure
-from groups.domain import domain
-from groups.external import external
-from groups.record import record
-from groups.template import template
-from utils.message_handling import info_msg
+from dmcli.groups.application import application
+from dmcli.groups.category import category
+from dmcli.groups.configure import configure
+from dmcli.groups.domain import domain
+from dmcli.groups.external import external
+from dmcli.groups.record import record
+from dmcli.groups.template import template
+from dmcli.utils.message_handling import info_msg
+
+from ._version import __version__
 
 HEADER = """\
 ____                    _         _____

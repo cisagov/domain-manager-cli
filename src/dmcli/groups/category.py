@@ -3,8 +3,8 @@
 import click
 
 # cisagov Libraries
-from utils.categories import get_categories
-from utils.message_handling import success_msg
+from dmcli.utils.categories import get_categories
+from dmcli.utils.message_handling import success_msg
 
 
 @click.group()

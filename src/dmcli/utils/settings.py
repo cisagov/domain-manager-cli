@@ -3,7 +3,7 @@
 import os
 
 # cisagov Libraries
-from groups.configure import get_configuration
+from dmcli.groups.configure import get_configuration
 
 # First get settings from env var
 URL = os.environ.get("DOMAIN_MANAGER_API_URL")

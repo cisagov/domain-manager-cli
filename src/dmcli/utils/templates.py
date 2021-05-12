@@ -3,7 +3,7 @@
 import os
 
 # cisagov Libraries
-from utils import api
+from dmcli.utils import api
 
 
 def get_templates():

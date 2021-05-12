@@ -4,8 +4,8 @@ import click
 import requests
 
 # cisagov Libraries
-from utils.message_handling import error_msg
-from utils.settings import API_KEY, URL, auth
+from dmcli.utils.message_handling import error_msg
+from dmcli.utils.settings import API_KEY, URL, auth
 
 
 def verify():
