@@ -111,5 +111,5 @@ setup(
         ]
     },
     # Conveniently allows one to run the CLI tool as `dmcli`
-    entry_points={"console_scripts": ["dmcli = main:start"]},
+    entry_points={"console_scripts": ["dmcli = dmcli.main:start"]},
 )
