@@ -1,0 +1,1 @@
+"""Domain group tests."""
