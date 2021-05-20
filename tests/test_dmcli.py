@@ -18,7 +18,7 @@ PROJECT_VERSION = dmcli.__version__
 def test_stdout_version(capsys):
     """Verify that version string sent to stdout agrees with the module version."""
     with pytest.raises(SystemExit):
-        with patch.object(sys, "argv", ["bogus", "--version"]):
+        with patch.object(sys, "argv", ["dmcli", "--version"]):
             main.start()
     captured = capsys.readouterr()
     assert (
