@@ -19,9 +19,19 @@ def test_application_group_command(mocker, capsys):
     assert (
         captured.out.splitlines()[0]
         == "Usage: dmcli application [OPTIONS] COMMAND [ARGS]..."
-    )
+    ), "base application command not outputting usage."
 
 
-def test_application_all_command():
+def test_application_all_command(mocker, capsys):
     """Test `dmcli application all`."""
-    return
+    with pytest.raises(SystemExit):
+        mocker.patch.object(sys, "argv", ["dmcli", "application", "all"])
+        mocker.patch(
+            "dmcli.utils.api.get", return_value=[{"name": "test"}, {"name": "test2"}]
+        )
+        main.start()
+
+    captured = capsys.readouterr()
+    lines = captured.out.splitlines()
+    assert lines[0].strip() == "test", "First application not listed"
+    assert lines[1].strip() == "test2", "Second application not listed"
