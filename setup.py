@@ -107,6 +107,7 @@ setup(
             "pre-commit",
             "pytest",
             "pytest-cov",
+            "pytest-mock",
         ]
     },
     # Conveniently allows one to run the CLI tool as `dmcli`
