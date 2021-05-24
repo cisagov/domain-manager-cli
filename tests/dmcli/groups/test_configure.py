@@ -4,12 +4,14 @@ import re
 
 # Third-Party Libraries
 from click.testing import CliRunner
+import pytest
 
 # cisagov Libraries
 from dmcli.groups.configure import configure
 
 
-def test_configure_command(mocker, capsys):
+@pytest.fixture(scope="module")
+def test_configure_command():
     """Test `dmcli configure`."""
     runner = CliRunner()
     result = runner.invoke(configure, input="\n".join(["test.url", "test_api_key"]))
