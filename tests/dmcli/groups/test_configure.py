@@ -4,13 +4,11 @@ import re
 
 # Third-Party Libraries
 from click.testing import CliRunner
-import pytest
 
 # cisagov Libraries
 from dmcli.groups.configure import configure
 
 
-@pytest.fixture(scope="module")
 def test_configure_command():
     """Test `dmcli configure`."""
     runner = CliRunner()

@@ -1,37 +1,30 @@
 """Application group tests."""
-# Standard Python Libraries
-import sys
-
 # Third-Party Libraries
-import pytest
+from click.testing import CliRunner
 
 # cisagov Libraries
-from dmcli import main
+from dmcli.groups.application import application
 
 
-def test_application_group_command(mocker, capsys):
+def test_application_group_command():
     """Test `dmcli application`."""
-    with pytest.raises(SystemExit):
-        mocker.patch.object(sys, "argv", ["dmcli", "application"])
-        main.start()
+    runner = CliRunner()
+    result = runner.invoke(application)
 
-    captured = capsys.readouterr()
     assert (
-        captured.out.splitlines()[0]
-        == "Usage: dmcli application [OPTIONS] COMMAND [ARGS]..."
-    ), "base application command not outputting usage."
+        result.output.splitlines()[0]
+        == """Usage: application [OPTIONS] COMMAND [ARGS]..."""
+    )
 
 
-def test_application_all_command(mocker, capsys):
+def test_application_all_command(mocker):
     """Test `dmcli application all`."""
-    with pytest.raises(SystemExit):
-        mocker.patch.object(sys, "argv", ["dmcli", "application", "all"])
-        mocker.patch(
-            "dmcli.utils.api.get", return_value=[{"name": "test"}, {"name": "test2"}]
-        )
-        main.start()
+    mocker.patch(
+        "dmcli.utils.api.get", return_value=[{"name": "test"}, {"name": "test2"}]
+    )
 
-    captured = capsys.readouterr()
-    lines = captured.out.splitlines()
-    assert lines[0].strip() == "test", "First application not listed"
-    assert lines[1].strip() == "test2", "Second application not listed"
+    runner = CliRunner()
+    result = runner.invoke(application, "all")
+
+    assert result.output.splitlines()[0] == "test"
+    assert result.output.splitlines()[1] == "test2"
