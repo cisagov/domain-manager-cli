@@ -13,7 +13,7 @@ def test_domain_group_command():
 
     assert (
         result.output.splitlines()[0] == "Usage: domain [OPTIONS] COMMAND [ARGS]..."
-    ), "base category command not outputting usage."
+    ), "base domain command not outputting usage."
 
 
 def test_domain_all_command(mocker):
