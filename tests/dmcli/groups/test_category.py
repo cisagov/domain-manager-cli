@@ -1,35 +1,27 @@
 """Category group tests."""
-# Standard Python Libraries
-import sys
-
 # Third-Party Libraries
-import pytest
+from click.testing import CliRunner
 
 # cisagov Libraries
-from dmcli import main
+from dmcli.groups.category import category
 
 
-def test_category_group_command(mocker, capsys):
+def test_category_group_command():
     """Test `dmcli category`."""
-    with pytest.raises(SystemExit):
-        mocker.patch.object(sys, "argv", ["dmcli", "category"])
-        main.start()
+    runner = CliRunner()
+    result = runner.invoke(category)
 
-    captured = capsys.readouterr()
     assert (
-        captured.out.splitlines()[0]
-        == "Usage: dmcli category [OPTIONS] COMMAND [ARGS]..."
+        result.output.splitlines()[0] == "Usage: category [OPTIONS] COMMAND [ARGS]..."
     ), "base category command not outputting usage."
 
 
-def test_category_all_command(mocker, capsys):
+def test_category_all_command(mocker):
     """Test `dmcli category all`."""
-    with pytest.raises(SystemExit):
-        mocker.patch.object(sys, "argv", ["dmcli", "category", "all"])
-        mocker.patch("dmcli.utils.api.get", return_value=["test", "test2"])
-        main.start()
+    mocker.patch("dmcli.utils.api.get", return_value=["test", "test2"])
 
-    captured = capsys.readouterr()
-    lines = captured.out.splitlines()
-    assert lines[0].strip() == "test", "First category not listed"
-    assert lines[1].strip() == "test2", "Second category not listed"
+    runner = CliRunner()
+    result = runner.invoke(category, "all")
+
+    assert result.output.splitlines()[0] == "test", "First category not listed"
+    assert result.output.splitlines()[1] == "test2", "Second category not listed"
