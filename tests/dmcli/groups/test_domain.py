@@ -79,3 +79,40 @@ def test_domain_nameservers_command(mocker):
     result = runner.invoke(domain, "nameservers", input="example.com")
 
     assert result.output.splitlines()[0] == "Domain: example.com"
+
+
+def test_domain_upload_command(mocker):
+    """Test `dmcli domain upload`."""
+    mocker.patch("dmcli.utils.api.get", return_value={"name": "example.com"})
+    mocker.patch("builtins.open", mocker.mock_open(read_data="zipfile"))
+    with open("/uploads/test.zip", "rb") as zipfile:
+        content = zipfile.read()
+        mocker.patch(
+            "dmcli.utils.api.post",
+            return_value="/uploads/test.zip",
+        )
+
+        runner = CliRunner()
+        runner.invoke(
+            domain, ["upload", "-f", "/uploads/test.zip", "-d", "example.com"]
+        )
+
+    assert content == "zipfile"
+
+
+def test_domain_remove_command(mocker):
+    """Test `dmcli domain remove`."""
+    mocker.patch(
+        "dmcli.utils.api.get",
+        return_value={"name": "example.com"},
+    )
+
+    mocker.patch(
+        "dmcli.utils.api.delete",
+        return_value={"name": "example.com"},
+    )
+
+    runner = CliRunner()
+    result = runner.invoke(domain, "remove", input="example.com")
+
+    assert result.output.splitlines()[0] == "Domain name: example.com"
