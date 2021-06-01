@@ -116,3 +116,39 @@ def test_domain_remove_command(mocker):
     result = runner.invoke(domain, "remove", input="example.com")
 
     assert result.output.splitlines()[0] == "Domain name: example.com"
+
+
+def test_domain_launch_command(mocker):
+    """Test `dmcli domain launch`."""
+    mocker.patch(
+        "dmcli.utils.api.get",
+        return_value={"name": "example.com"},
+    )
+
+    mocker.patch(
+        "dmcli.utils.api.post",
+        return_value={"name": "example.com"},
+    )
+
+    runner = CliRunner()
+    result = runner.invoke(domain, "launch", input="example.com")
+
+    assert result.output.splitlines()[0] == "Domain name: example.com"
+
+
+def test_domain_takedown_command(mocker):
+    """Test `dmcli domain takedown`."""
+    mocker.patch(
+        "dmcli.utils.api.get",
+        return_value={"name": "example.com"},
+    )
+
+    mocker.patch(
+        "dmcli.utils.api.delete",
+        return_value={"name": "example.com"},
+    )
+
+    runner = CliRunner()
+    result = runner.invoke(domain, "takedown", input="example.com")
+
+    assert result.output.splitlines()[0] == "Domain name: example.com"
