@@ -152,3 +152,15 @@ def test_domain_takedown_command(mocker):
     result = runner.invoke(domain, "takedown", input="example.com")
 
     assert result.output.splitlines()[0] == "Domain name: example.com"
+
+
+def test_domain_categorize_command(mocker):
+    """Test `dmcli domain categorize`."""
+    mocker.patch(
+        "dmcli.utils.api.get",
+        return_value={"name": "example.com"},
+    )
+    runner = CliRunner()
+    result = runner.invoke(domain, "categorize", input="example.com")
+
+    assert result.output.splitlines()[0] == "Domain name: example.com"
