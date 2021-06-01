@@ -25,7 +25,7 @@ def check(domain_name):
 
 @external.command("categorize")
 @click.option("-d", "--domain-name", required=True, prompt=True)
-def categorize(domain_name, category):
+def categorize(domain_name):
     """Categorize an unmanaged website."""
     categories = get_categories()
     category_name = click.prompt(
