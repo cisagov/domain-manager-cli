@@ -74,16 +74,21 @@ def test_record_delete_command(mocker):
         "delete",
         input="\n".join(["example.com", "record-id"]),
     )
-    print("YUP: ", result.output)
+
     assert result.output.splitlines()[0] == "Domain name: example.com"
     assert result.output.splitlines()[1] == "Record id: record-id"
 
 
-# def test_record_update_command():
-#     """Test `dmcli record update`."""
-#     runner = CliRunner()
-#     result = runner.invoke(record)
+def test_record_update_command(mocker):
+    """Test `dmcli record update`."""
+    mocker.patch(
+        "dmcli.utils.api.get",
+        return_value=[{"name": "example.com"}],
+    )
+    runner = CliRunner()
+    result = runner.invoke(
+        record, "update", input="\n".join(["example.com", "record-id"])
+    )
 
-#     assert (
-#         result.output.splitlines()[0] == "Usage: record [OPTIONS] COMMAND [ARGS]..."
-#     ), "base record command not outputting usage."
+    assert result.output.splitlines()[0] == "Domain name: example.com"
+    assert result.output.splitlines()[1] == "Record id: record-id"
