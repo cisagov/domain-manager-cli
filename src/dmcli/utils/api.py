@@ -1,7 +1,7 @@
 """Functions to make requests against API."""
 # Third-Party Libraries
 import click
-import requests
+import requests  # type: ignore
 
 # cisagov Libraries
 from dmcli.utils.message_handling import error_msg
