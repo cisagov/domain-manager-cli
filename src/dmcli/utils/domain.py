@@ -78,9 +78,10 @@ def takedown_site(domain: dict):
 
 def categorize_site(domain: dict, category_name: str):
     """Categorize domain."""
-    return api.get(f"/api/domain/{domain['_id']}/categorize/?category={category_name}")[
-        "success"
-    ]
+    return api.post(
+        f"/api/domain/{domain['_id']}/categorize/?category={category_name}",
+        json={"category": category_name},
+    )["success"]
 
 
 def proxy_category_check(domain_id: str):
