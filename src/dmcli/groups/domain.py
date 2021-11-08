@@ -152,18 +152,14 @@ def categorize(domain_name):
 def check_category(domain_name):
     """Get a domain's category."""
     domain = get_domain(domain_name=domain_name)
-    proxy_category_check(domain_id=domain.get("_id"))
+    proxies = proxy_category_check(domain_id=domain.get("_id"))
 
-    if not domain.get("category_results"):
+    if isinstance(proxies, dict):
         warning_msg("This domain has not yet been categorized.")
         return
 
-    warning_msg("Check back in a few minutes for updated results")
     success_msg(
-        "\n".join(
-            f"{d.get('proxy')}: {d.get('submitted_category')}"
-            for d in domain.get("category_results")
-        ),
+        "\n".join(f"{p.get('proxy')}: {p.get('status')}" for p in proxies),
     )
 
 
