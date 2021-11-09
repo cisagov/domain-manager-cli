@@ -7,7 +7,6 @@ from dmcli.groups.application import application
 from dmcli.groups.category import category
 from dmcli.groups.configure import configure
 from dmcli.groups.domain import domain
-from dmcli.groups.external import external
 from dmcli.groups.record import record
 from dmcli.groups.template import template
 from dmcli.utils.message_handling import info_msg
@@ -43,7 +42,6 @@ def start():
     cli.add_command(category)
     cli.add_command(configure)
     cli.add_command(domain)
-    cli.add_command(external)
     cli.add_command(record)
     cli.add_command(template)
 
