@@ -20,10 +20,10 @@ def create_external_domain(domain_name: str, proxy_email: str):
 def categorize_external_domain(domain_id: str, category: str):
     """Categorize an external domain."""
     return api.post(
-        f"api/external-domain/{domain_id}/categorize/", json={"category": category}
+        f"/api/external-domain/{domain_id}/categorize/", json={"category": category}
     )
 
 
 def get_external_domain_categories(domain_id: str):
     """Get categorization data on domain categories."""
-    return api.get(f"api/external-domain/{domain_id}/categorize/")
+    return api.get(f"/api/external-domain/{domain_id}/categorize/")
