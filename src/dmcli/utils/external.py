@@ -3,6 +3,22 @@
 from dmcli.utils import api
 
 
-def get_external_domains():
+def get_external_domains(domain_name: str = ""):
     """Get all external domains."""
-    return api.get("/api/external-domains/")
+    path = "/api/external-domains/"
+    if domain_name:
+        path = f"{path}?name={domain_name}"
+    return api.get(path)
+
+
+def create_external_domain(domain_name: str, proxy_email: str):
+    """Create an external domain."""
+    data = {"name": domain_name, "proxy_email": proxy_email}
+    return api.post("/api/external-domains/", json=data)
+
+
+def categorize_external_domain(domain_id: str, category: str):
+    """Categorize an external domain."""
+    return api.post(
+        f"api/external-domain/{domain_id}/categorize/", json={"category": category}
+    )
