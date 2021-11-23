@@ -22,3 +22,8 @@ def categorize_external_domain(domain_id: str, category: str):
     return api.post(
         f"api/external-domain/{domain_id}/categorize/", json={"category": category}
     )
+
+
+def get_external_domain_categories(domain_id: str):
+    """Get categorization data on domain categories."""
+    return api.get(f"api/external-domain/{domain_id}/categorize/")

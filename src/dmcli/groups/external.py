@@ -7,6 +7,7 @@ from dmcli.utils.categories import get_categories
 from dmcli.utils.external import (
     categorize_external_domain,
     create_external_domain,
+    get_external_domain_categories,
     get_external_domains,
 )
 from dmcli.utils.message_handling import success_msg, warning_msg
@@ -28,14 +29,15 @@ def all():
 @click.option("-d", "--domain", required=True, prompt=True)
 def details(domain):
     """Get external domain details."""
+    domain_details = get_external_domains(domain_name=domain)
+    cat_details = get_external_domain_categories(domain_details["_id"])
     return success_msg(
         "\n".join(
             f"{key}: {value}"
-            for key, value in get_external_domains(domain_name="thisisatest.com")[
-                0
-            ].items()
+            for key, value in domain_details[0].items()
             if value is not None and key != "_id"
         )
+        + "\n".join(f"Proxy: {cat.proxy} Status: {cat.status}" for cat in cat_details)
     )
 
 
