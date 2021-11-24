@@ -7,6 +7,7 @@ from dmcli.utils.categories import get_categories
 from dmcli.utils.external import (
     categorize_external_domain,
     create_external_domain,
+    delete_external_domain,
     get_external_domain_categories,
     get_external_domains,
 )
@@ -57,3 +58,12 @@ def categorize(domain, email):
     )
     resp = categorize_external_domain(domain["_id"], category_name)
     return success_msg(resp.get("success"))
+
+
+@external.command("delete")
+@click.option("-d", "--domain", required=True, prompt=True)
+def delete(domain):
+    """Delete an external domain."""
+    external_domain = get_external_domains(domain)
+    delete_external_domain(external_domain[0]["_id"])
+    return success_msg(f"{domain} has been deleted.")

@@ -27,3 +27,8 @@ def categorize_external_domain(domain_id: str, category: str):
 def get_external_domain_categories(domain_id: str):
     """Get categorization data on domain categories."""
     return api.get(f"/api/external-domain/{domain_id}/categorize/")
+
+
+def delete_external_domain(domain_id: str):
+    """Delete external domain."""
+    return api.delete(f"/api/external-domain/{domain_id}/")
