@@ -49,7 +49,7 @@ def details(domain):
 def categorize(domain, email):
     """Categorize a new external domain."""
     domain = create_external_domain(domain, email)
-    if domain["message"]:
+    if domain.get("message"):
         warning_msg(domain["message"])
         return
     categories = get_categories()
